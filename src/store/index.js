@@ -3,33 +3,17 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
+
   state: {
-    works: [
-      {
-        id: 1,
-        title: "test1"
-      },
-      {
-        id: 2,
-        title: "test2"
-      },
-      {
-        id: 3,
-        title: "test3"
-      },
-      {
-        id: 3,
-        title: "test3"
-      },
-      {
-        id: 3,
-        title: "test3"
-      },
-      {
-        id: 3,
-        title: "test3"
-      }
-      
-    ]
+    works: [],
+    loading: true
+  },
+  mutations: {
+    setWorks(state, value){
+      state.works = value
+    },
+    setLoading(state,value){
+      state.loading=value
+    }
   }
 })

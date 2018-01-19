@@ -1,23 +1,43 @@
 <template lang="pug">
   #app
     transition(name="page" , mode="out-in")
+      pageLoading(v-if="loading")
+    transition(name="page" , mode="out-in")
       router-view(:key="$route.path")
 </template>
 
 <script>
+import pageLoading from '@/components/pages/pageLoading'
+import {mapState} from 'vuex'
+
 export default {
-  name: 'app'
+  name: 'app',
+  components: {
+    pageLoading
+  },
+  computed: {
+    ...mapState(['loading'])
+  }
 }
 </script>
 
 <style lang="sass">
-#app
+
+body
   font-family: 'Avenir', Helvetica, Arial, sans-serif !important
   -webkit-font-smoothing: antialiased
   -moz-osx-font-smoothing: grayscale
   text-align: center
   color: #2c3e50
-  margin-top: 60px
+  overflow-y: scroll
+  // height: auto
+  // height: 100vh
+  // overflow: hidden
+  border: solid 15px white
+
+
+  
+  // margin-top: 60px
 
 .page-enter-active,.page-leave-active
   transition: 0.3s
