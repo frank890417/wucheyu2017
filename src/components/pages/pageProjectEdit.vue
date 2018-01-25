@@ -3,23 +3,24 @@
     .container-fluid
       .row
         .col-sm-3.col-list
-          ul.list-group.text-left
+          ul.list-group.text-left(style="height: 600px; overflow: scroll")
             li.list-group-item(v-for="(w,wid) in works", @click="nowId=wid", :class="{active:nowId==wid}")
               .row
                 .col-10 {{w.title}}
                 .col-2
                   .btn.btn-danger.btn-xs(@click="removeItem(wid)") -
             li.list-group-item(@click="addItem") + Add Item 
-            li.list-group-item(@click="saveAll") saveAll!
+          button.btn.btn-primary.form-control(@click="saveAll") Save all!
         .col-sm-9.offset-3(v-if="work", :key="nowId")
           .container.text-left
             .row
               .col-sm-12
                 h2 {{work.title}}
+                  router-link.btn.btn-secondary.float-right(:href="'/project/'+nowId", target="_blank") Open Project
                 hr
-                //- .btn.btn-primary.pull-right(@click="save") Save
+                
             .row
-              .col-sm-12
+              .col-sm-4
                 el-form(label-width="100px")
                   el-form-item(label="title")
                     el-input(v-model="work.title")
@@ -31,6 +32,18 @@
                     el-input(v-model="work.client")
                   el-form-item(label="Catagory")
                     el-input(v-model="work.type")
+                  el-form-item(label="類別")
+                    el-select(v-model="work.cata"
+                              multiple
+                              filterable
+                              allow-create
+                              default-first-option
+                              placeholder="請選擇Hashtag或建立")
+                      el-option(
+                        v-for="item in defaut_hashtags"
+                        :key="item"
+                        :label="item"
+                        :value="item")
                   el-form-item(label="work")
                     el-input(v-model="work.work")
                   el-form-item(label="cover")
@@ -46,12 +59,13 @@
                           :show-file-list="false"
                         )
                           i(class="el-icon-plus avatar-uploader-icon")
-
-                  el-form-item(label="content")
+              .col-sm-8
+                el-form
+                  el-form-item(label="")
                     VueEditor.ve(:id ="'content'", v-model="work.content" ,
                       :useCustomImageHandler="true",
                       @imageAdded="handleImageAdded" ,
-                      style="height: 700px;margin-bottom: 50px")
+                      style="height: 600px;margin-bottom: 50px")
                     //- el-input(v-model="work.content", type="textarea")
               .col-sm-12
           
@@ -64,7 +78,10 @@ export default {
   components: {VueEditor},
   data () {
     return {
-      nowId: 0
+      nowId: 0,
+      defaut_hashtags: [
+        "UI","UX","CIS","Graphics","Website","Installation Art","3D","Animation","Project","Hackthon"
+      ]
     }
   },
   computed:{
@@ -170,8 +187,6 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="sass">
 
-h1, h2 
-  font-weight: normal
 h1
   font-weight: 900
 .page-edit

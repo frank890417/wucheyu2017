@@ -8,7 +8,9 @@
           h2 Portfolio
           hr
           p "Designing is a way to discover the world for me."
-          p I am a visual designer and web page engineer of frontend and backend from Taiwan. <br>Programming is a hobby and a career to me. In addition to the undergraduate training in electrical and computer engineering, I have had three years of experience in visual design. <br><br>My professional ambition led me to establish Monoame, a design studio, at which I am responsible for planning, design, and development of dynamic web pages. Examples include music, photography, 3D animation, and games, which are worth all the brainstorming and time. To share my passion and knowledge in design and engineering, I opened online classes to introduce interested learners to the industry. 
+          p I am a visual designer and web page engineer of frontend and backend from Taiwan.
+            |<br>Programming is a hobby and a career to me. In addition to the undergraduate training in electrical and computer engineering, I have had three years of experience in visual design. <br><br>
+            | My professional ambition led me to establish Monoame, a design studio, at which I am responsible for planning, design, and development of dynamic web pages. Examples include music, photography, 3D animation, and games, which are worth all the brainstorming and time. To share my passion and knowledge in design and engineering, I opened online classes to introduce interested learners to the industry. 
           //p In this portfolio are works of CIS visual identity, interactive web pages, 3D animation, and physical devices. Design is a means through which I explore the world. I thus intend to create unique works by exploiting innovation and all kinds of possibilities and draw inspiration from different professional fields. More work examples can be accessed on Monoame: http://wucheyu.monoame.com/
           a(href="http://issuu.com/wucheyu/docs/2017_portfolio" target="_blank") (ISSUU)
 
@@ -24,7 +26,10 @@
                   )
                   .work(
                     :style="cssbg(work.cover)")
-                  h6 {{ work.date }}
+                    h6 {{ work.date }}
+                  .tags
+                    .tag(v-for="tag in work.cata") {{tag}}
+                    
                   h5 {{work.title}}
      
           
@@ -70,7 +75,7 @@ h4
 h5
   // color: white
   margin-top: 15px
-  font-size: 20px
+  font-size: 22px
   margin-bottom: 30px
   opacity: 0.8
   border-left: solid 5px white
@@ -94,6 +99,7 @@ h6
   position: fixed
   left: 50px
   top: 50px
+  border-right: solid 1px rgba(black,0.05)
 
   
 .row-info
@@ -114,7 +120,7 @@ h6
   
 .head
   border-radius: 50%
-  width: 200px
+  width: 180px
   margin-bottom: 40px
   margin-top: 50px
 .col-work
@@ -164,4 +170,18 @@ h6
     &:hover
       h4
         opacity: 1
+    h6
+      position: absolute
+      right: 0
+      bottom: -55px
+      opacity: 0.5
+  .tags
+    display: flex
+    .tag
+      padding: 4px 20px
+      background-color: #eee
+      // border: solid 1px #e6e6e6
+      margin: 5px
+      border-radius: 50px
+      margin-top: 20px
 </style>

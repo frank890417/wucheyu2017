@@ -14,7 +14,7 @@ export default new Router({
       name: 'index',
       component: pageIndex
     }, {
-      path: '/project/edit',
+      path: '/manage',
       name: 'project_edit',
       component: pageProjectEdit
     }, {
