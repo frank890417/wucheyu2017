@@ -41,7 +41,7 @@ body
   // margin-top: 60px
 
 .page-enter-active,.page-leave-active
-  transition: 0.3s
+  transition: 0.5s
   // &:before
   //   display: block
   //   content: ""

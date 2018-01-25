@@ -19,10 +19,11 @@
           .row.row-work
             .container
               .row
-                router-link.col-xs-12.col-sm-6.col-md-6.col-work.animated.fadeIn(
+                router-link.col-xs-12.col-sm-12.col-md-12.col-lg-6.col-work.animated.fadeIn(
                     v-for="(work,wid) in works", 
                     :to="`/project/${wid}`", 
                     :key="wid"
+                    
                   )
                   .work(
                     :style="cssbg(work.cover)")
@@ -58,6 +59,16 @@ export default {
       // console.log(result)
       return result
     }, 
+    // colorShadow(color){
+    //   return {
+    //     'box-shadow': "0px 10px 50px -20px "+color
+    //   }
+    // },
+    objCombine(a,b){
+      return {
+        ...a,...b
+      }
+    }
   }
 }
 </script>
@@ -128,9 +139,9 @@ h6
   margin-bottom: 40px
   margin-top: 50px
 .col-work
-  padding: 18px
+  padding: 0px 25px
   color: black
-
+  margin-bottom: 45px
   &:hover
     text-decoration: none
   .work
@@ -146,7 +157,7 @@ h6
     justify-content: center
     align-items: center
     position: relative
-    box-shadow: 0px 15px 20px -5px rgba(black,0.2)
+    box-shadow: 0px 10px 20px -5px rgba(black,0.2)
     transition-duration: 0.5s
     &:hover
       transform: translateY(-5px)
@@ -185,12 +196,15 @@ h6
     display: flex
     position: relative
     .tag
-      padding: 4px 20px
+      padding: 3px 20px
       background-color: #eee
+      color: #777
       // border: solid 1px #e6e6e6
       margin: 5px
+      font-weight: 500
       border-radius: 50px
-      margin-top: 20px
+      margin-top: 25px
+      font-size: 16px
     h6
       position: absolute
       // right: 0
@@ -198,5 +212,6 @@ h6
       right: 0px
       top: 20px
       // bottom: -55px
-      opacity: 0.5
+      opacity: 0.4
+      font-size: 14px
 </style>

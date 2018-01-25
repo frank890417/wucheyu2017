@@ -2,7 +2,13 @@
   .page-edit
     .container-fluid
       .row
+        .col-sm-12
+
         .col-sm-3.col-list
+          ul.breadcrumb
+            li.breadcrumb-item
+              router-link(to="/", target="_blank") 管理
+            li.breadcrumb-item 編輯專案
           ul.list-group.text-left(style="height: 600px; overflow: scroll")
             li.list-group-item(v-for="(w,wid) in works", @click="nowId=wid", :class="{active:nowId==wid}")
               .row
@@ -16,7 +22,7 @@
             .row
               .col-sm-12
                 h2 {{work.title}}
-                  router-link.btn.btn-secondary.float-right(:href="'/project/'+nowId", target="_blank") Open Project
+                  router-link.btn.btn-secondary.float-right(:to="'/project/'+nowId", target="_blank") Open Project
                 hr
                 
             .row
@@ -28,6 +34,8 @@
                     el-input(v-model="work.date")
                   el-form-item(label="link")
                     el-input(v-model="work.link")
+                  el-form-item(label="color")
+                    el-color-picker(v-model="work.color")
                   el-form-item(label="client")
                     el-input(v-model="work.client")
                   el-form-item(label="Catagory")
