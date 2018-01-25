@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import pageIndex from '@/components/pages/pageIndex'
+import pageAbout from '@/components/pages/pageAbout'
 import pageProject from '@/components/pages/pageProject'
 import pageProjectEdit from '@/components/pages/pageProjectEdit'
 
@@ -13,6 +14,10 @@ export default new Router({
       path: '/',
       name: 'index',
       component: pageIndex
+    }, {
+      path: '/',
+      name: 'about',
+      component: pageAbout
     }, {
       path: '/manage',
       name: 'project_edit',

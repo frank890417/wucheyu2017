@@ -6,6 +6,8 @@ import router from './router'
 import store from './store'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
+import SoftScroll from './plugins/soft_scroll.js' 
+SoftScroll.init()
 // import Tether from "tether"
 // import $ from "jquery"
 // window.jQuery = $

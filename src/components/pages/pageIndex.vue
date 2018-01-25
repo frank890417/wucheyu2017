@@ -10,8 +10,7 @@
           p "Designing is a way to discover the world for me."
           p I am a visual designer and web page engineer of frontend and backend from Taiwan.
             |<br>Programming is a hobby and a career to me. In addition to the undergraduate training in electrical and computer engineering, I have had three years of experience in visual design. <br><br>
-            | My professional ambition led me to establish Monoame, a design studio, at which I am responsible for planning, design, and development of dynamic web pages. Examples include music, photography, 3D animation, and games, which are worth all the brainstorming and time. To share my passion and knowledge in design and engineering, I opened online classes to introduce interested learners to the industry. 
-          //p In this portfolio are works of CIS visual identity, interactive web pages, 3D animation, and physical devices. Design is a means through which I explore the world. I thus intend to create unique works by exploiting innovation and all kinds of possibilities and draw inspiration from different professional fields. More work examples can be accessed on Monoame: http://wucheyu.monoame.com/
+            //p In this portfolio are works of CIS visual identity, interactive web pages, 3D animation, and physical devices. Design is a means through which I explore the world. I thus intend to create unique works by exploiting innovation and all kinds of possibilities and draw inspiration from different professional fields. More work examples can be accessed on Monoame: http://wucheyu.monoame.com/
           a(href="http://issuu.com/wucheyu/docs/2017_portfolio" target="_blank") (ISSUU)
           
 
@@ -77,6 +76,10 @@ export default {
 <style scoped lang="sass">
 h1, h2 
   font-weight: normal
+
+h2
+  background-image: linear-gradient(transparent 0% ,transparent 50%, #ffd428 50%)
+  display: inline-block
 h1
   font-weight: 900
   
@@ -110,11 +113,18 @@ h6
 
 .col-info
   position: fixed
-  left: 50px
+  left: 30px
   top: 50px
   padding: 20px
+  // padding-right: 20px
   border-right: solid 1px rgba(black,0.08)
   // background-color: #333
+  @media screen and (max-width: 700px)
+    position: relative
+    padding: 0
+    left: 0
+    top: 0
+    border: none
 
   
 .row-info
@@ -137,7 +147,7 @@ h6
   border-radius: 50%
   width: 180px
   margin-bottom: 40px
-  margin-top: 50px
+  margin-top: 20px
 .col-work
   padding: 0px 25px
   color: black
@@ -196,7 +206,7 @@ h6
     display: flex
     position: relative
     .tag
-      padding: 3px 20px
+      padding: 2.5px 18px
       background-color: #eee
       color: #777
       // border: solid 1px #e6e6e6
