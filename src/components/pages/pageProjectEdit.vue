@@ -11,7 +11,7 @@
                   .btn.btn-danger.btn-xs(@click="removeItem(wid)") -
             li.list-group-item(@click="addItem") + Add Item 
             li.list-group-item(@click="saveAll") saveAll!
-        .col-sm-9.offset-3(v-if="work", :key="work.title")
+        .col-sm-9.offset-3(v-if="work", :key="nowId")
           .container.text-left
             .row
               .col-sm-12

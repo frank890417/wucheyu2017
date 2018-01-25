@@ -8,7 +8,7 @@
           h2 Portfolio
           hr
           p "Designing is a way to discover the world for me."
-          p I am a visual designer and web page engineer of frontend and backend from Taiwan. Programming is a hobby and a career to me. In addition to the undergraduate training in electrical and computer engineering, I have had three years of experience in visual design. My professional ambition led me to establish Monoame, a design studio, at which I am responsible for planning, design, and development of dynamic web pages. Examples include music, photography, 3D animation, and games, which are worth all the brainstorming and time. To share my passion and knowledge in design and engineering, I opened online classes to introduce interested learners to the industry. 
+          p I am a visual designer and web page engineer of frontend and backend from Taiwan. <br>Programming is a hobby and a career to me. In addition to the undergraduate training in electrical and computer engineering, I have had three years of experience in visual design. <br><br>My professional ambition led me to establish Monoame, a design studio, at which I am responsible for planning, design, and development of dynamic web pages. Examples include music, photography, 3D animation, and games, which are worth all the brainstorming and time. To share my passion and knowledge in design and engineering, I opened online classes to introduce interested learners to the industry. 
           //p In this portfolio are works of CIS visual identity, interactive web pages, 3D animation, and physical devices. Design is a means through which I explore the world. I thus intend to create unique works by exploiting innovation and all kinds of possibilities and draw inspiration from different professional fields. More work examples can be accessed on Monoame: http://wucheyu.monoame.com/
           a(href="http://issuu.com/wucheyu/docs/2017_portfolio" target="_blank") (ISSUU)
 
@@ -68,21 +68,22 @@ h4
   margin-top: 20px
 
 h5
-  color: white
-  margin-top: 20px
-  font-size: 18px
+  // color: white
+  margin-top: 15px
+  font-size: 20px
   margin-bottom: 30px
   opacity: 0.8
   border-left: solid 5px white
-  padding-left: 20px
+  // padding-left: 20px
   line-height: 1.5
-  font-weight: 500
-  &:first-letter
-    font-size: 30px
-    margin-right: 2px
+  font-weight: 800
+  width: 100%
+  // &:first-letter
+    // font-size: 30px
+    // margin-right: 2px
 
 h6
-  color: white
+  // color: white
   opacity: 0.5
   letter-spacing: 1px
   float: right
@@ -106,8 +107,8 @@ h6
   
 
 .page-index
-  background-color: black
-  color: white
+  // background-color: black
+  // color: white
   hr
     border-color: rgba(white,0.2)
   
@@ -118,6 +119,8 @@ h6
   margin-top: 50px
 .col-work
   padding: 18px
+  color: black
+
   &:hover
     text-decoration: none
   .work

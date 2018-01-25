@@ -33,7 +33,7 @@ body
   // height: auto
   // height: 100vh
   // overflow: hidden
-  border: solid 15px white
+  // border: solid 15px white
 
 
   
