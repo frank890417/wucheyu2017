@@ -13,7 +13,7 @@
             | My professional ambition led me to establish Monoame, a design studio, at which I am responsible for planning, design, and development of dynamic web pages. Examples include music, photography, 3D animation, and games, which are worth all the brainstorming and time. To share my passion and knowledge in design and engineering, I opened online classes to introduce interested learners to the industry. 
           //p In this portfolio are works of CIS visual identity, interactive web pages, 3D animation, and physical devices. Design is a means through which I explore the world. I thus intend to create unique works by exploiting innovation and all kinds of possibilities and draw inspiration from different professional fields. More work examples can be accessed on Monoame: http://wucheyu.monoame.com/
           a(href="http://issuu.com/wucheyu/docs/2017_portfolio" target="_blank") (ISSUU)
-
+          
 
         .col-sm-9.offset-sm-3.offset-xs-0
           .row.row-work
@@ -26,11 +26,12 @@
                   )
                   .work(
                     :style="cssbg(work.cover)")
-                    h6 {{ work.date }}
                   .tags
                     .tag(v-for="tag in work.cata") {{tag}}
+                    h6 {{ work.date }}
                     
                   h5 {{work.title}}
+                  
      
           
 
@@ -81,8 +82,9 @@ h5
   border-left: solid 5px white
   // padding-left: 20px
   line-height: 1.5
-  font-weight: 800
+  font-weight: 600
   width: 100%
+  color: #333
   // &:first-letter
     // font-size: 30px
     // margin-right: 2px
@@ -99,7 +101,9 @@ h6
   position: fixed
   left: 50px
   top: 50px
-  border-right: solid 1px rgba(black,0.05)
+  padding: 20px
+  border-right: solid 1px rgba(black,0.08)
+  // background-color: #333
 
   
 .row-info
@@ -133,6 +137,7 @@ h6
     background-color: #eee
     height: 320px
     display: block
+    border-radius: 3px
     // background-image: url(http://www.monoame.com/projects/proj_selinko/main.jpg)
     background-size: cover
     background-position: center center
@@ -141,6 +146,12 @@ h6
     justify-content: center
     align-items: center
     position: relative
+    box-shadow: 0px 15px 20px -5px rgba(black,0.2)
+    transition-duration: 0.5s
+    &:hover
+      transform: translateY(-5px)
+      box-shadow: 0px 20px 20px -5px rgba(black,0.2)
+    
     &:before
       content: 'Explore'
       opacity: 0
@@ -170,13 +181,9 @@ h6
     &:hover
       h4
         opacity: 1
-    h6
-      position: absolute
-      right: 0
-      bottom: -55px
-      opacity: 0.5
   .tags
     display: flex
+    position: relative
     .tag
       padding: 4px 20px
       background-color: #eee
@@ -184,4 +191,12 @@ h6
       margin: 5px
       border-radius: 50px
       margin-top: 20px
+    h6
+      position: absolute
+      // right: 0
+      // float: right
+      right: 0px
+      top: 20px
+      // bottom: -55px
+      opacity: 0.5
 </style>
