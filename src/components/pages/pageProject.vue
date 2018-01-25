@@ -24,12 +24,23 @@
               li 
                 label Responsibilities
                 span {{work.work}}
+              li(v-if="work.link")
+                label Link
+                a(:href="work.link", target="_blank") {{work.link}}
             p.text-left(v-html="processHTML(work.content)")
           //- h3 Project Information
-      .row
-        .col-sm-6
-          router-link(:to="`/project/${projnav.pre.id}`", v-if=" projnav.pre.id") Previous Work
-          router-link(:to="`/project/${projnav.nxt.id}`", v-if=" projnav.nxt.id") Next Work
+      .row.row-nav
+        router-link.col-sm-6.col-nav(
+          :to="`/project/${projnav.pre.id}`", 
+          v-if=" projnav.pre.id",
+          :style="cssbg(projnav.pre.work.cover)")
+          h3 {{projnav.pre.work.title}}
+        
+        router-link.col-sm-6.col-nav(
+          :to="`/project/${projnav.nxt.id}`", 
+          v-if="projnav.nxt.id",
+          :style="cssbg(projnav.nxt.work.cover)")
+          h3 {{projnav.nxt.work.title}}
           
 </template>
 
@@ -47,9 +58,9 @@ export default {
       return this.works[this.$route.params.id]
     },
     projnav(){
-      let current =  Object.keys(this.works).find((o,id)=>o==this.$route.params.id)
-      let pre =  Object.keys(this.works)[current-1]
-      let nxt =  Object.keys(this.works)[current+1]
+      let currentId =  Object.keys(this.works).indexOf(this.$route.params.id)
+      let pre =  Object.keys(this.works)[currentId-1]
+      let nxt =  Object.keys(this.works)[currentId+1]
       return {
         pre: {
           id: pre,
@@ -80,8 +91,14 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="sass">
+@keyframes coveropen
+  0%
+    height: 0
+  100%
+    height: 60vh
+
 .page-project
-  padding-bottom: 20vh
+  // padding-bottom: 20vh
     
   .content-area
     padding-top: 50px
@@ -98,6 +115,8 @@ export default {
     font-weight: 900
     margin-bottom: 30px
 
+
+
   .cover
     height: 60vh
     min-height: 60vh
@@ -111,6 +130,8 @@ export default {
     margin-right: -30px
     margin-bottom: 30px
     margin-top: -30px
+    animation: coveropen 1s
+
 
   .content-area
     img
@@ -125,4 +146,49 @@ export default {
     font-weight: 600
     &:after
       content: ":"
+
+.row-nav
+  padding: 0
+  margin: -30px
+
+.col-nav
+  cursor: pointer
+  background-color: #eee
+  background-size: cover
+  height: 500px
+  background-position: center center
+  color: transparent
+  margin-top: 200px
+  tranisiton: 0.5s
+  display: flex
+  justify-content: center
+  align-items: center
+  // margin: -15px
+  // width: calc( 100% + 30px )
+  &:hover
+    text-decoration: none !important
+  h3
+    position: relative
+    z-index: 3
+    transition: 0.5s
+    text-decoration: none
+
+
+  &:hover
+    color: white
+    &:before
+      opacity: 0.7
+
+  &:before
+    transition: 0.5s
+    content: ""
+    display: block
+    position: absolute
+    width: 100%
+    height: 100%
+    left: 0
+    top: 0
+    background-color: rgba(black,1)
+    opacity: 0
+
 </style>

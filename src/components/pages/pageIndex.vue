@@ -24,7 +24,7 @@
                   )
                   .work(
                     :style="cssbg(work.cover)")
-
+                  h6 {{ work.date }}
                   h5 {{work.title}}
      
           
@@ -70,14 +70,30 @@ h4
 h5
   color: white
   margin-top: 20px
-  font-size: 16px
+  font-size: 18px
   margin-bottom: 30px
+  opacity: 0.8
+  border-left: solid 5px white
+  padding-left: 20px
+  line-height: 1.5
+  font-weight: 500
+  &:first-letter
+    font-size: 30px
+    margin-right: 2px
+
+h6
+  color: white
   opacity: 0.5
+  letter-spacing: 1px
+  float: right
+  margin-top: 10px
+
 
 .col-info
   position: fixed
   left: 50px
   top: 50px
+
   
 .row-info
   padding: 20px 50px
@@ -86,6 +102,8 @@ h5
   // align-items: center
 .row-work
   padding: 20px
+  text-align: left
+  
 
 .page-index
   background-color: black
@@ -99,7 +117,9 @@ h5
   margin-bottom: 40px
   margin-top: 50px
 .col-work
-  padding: 15px
+  padding: 18px
+  &:hover
+    text-decoration: none
   .work
     background-color: #eee
     height: 320px
@@ -130,6 +150,7 @@ h5
       &:before
         opacity: 1
         background-color: rgba(black,0.7)
+        letter-spacing: 1px
     h4
       text-decoration: none !important
       color: white

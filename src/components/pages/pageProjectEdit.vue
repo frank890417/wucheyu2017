@@ -25,6 +25,8 @@
                     el-input(v-model="work.title")
                   el-form-item(label="date")
                     el-input(v-model="work.date")
+                  el-form-item(label="link")
+                    el-input(v-model="work.link")
                   el-form-item(label="client")
                     el-input(v-model="work.client")
                   el-form-item(label="Catagory")
@@ -48,7 +50,8 @@
                   el-form-item(label="content")
                     VueEditor.ve(:id ="'content'", v-model="work.content" ,
                       :useCustomImageHandler="true",
-                      @imageAdded="handleImageAdded" )
+                      @imageAdded="handleImageAdded" ,
+                      style="height: 700px;margin-bottom: 50px")
                     //- el-input(v-model="work.content", type="textarea")
               .col-sm-12
           
