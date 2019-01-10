@@ -4,12 +4,12 @@
       .row
         .col-sm-12
           nav
-            router-link(to="/") Index
-            router-link(to="/about") About
-            router-link(to="/work") Works
-            router-link(to="/experiment") Experiments
-            router-link(to="/research") Research
-            a(href="/static/Che-Yu Wu Resume.pdf") Resume
+            router-link(to="/" :class="{active: $route.path=='/'}") Index
+            //- router-link(to="/about" :class="{active: $route.path=='/about'}") About
+            //- router-link(to="/work" :class="{active: $route.path=='/work'}") Works
+            router-link(to="/experiment" :class="{active: $route.path=='/experiment'}") Experiments
+            router-link(to="/research" :class="{active: $route.path=='/research'}") Research
+            a(href="/static/Che-Yu Wu Resume.pdf" :class="{active: $route.path=='/resume'}") Resume
     transition(name="page" , mode="out-in")
       pageLoading(v-if="loading")
     transition(name="page" , mode="out-in")
@@ -46,6 +46,8 @@ body
   // overflow: hidden
   // border: solid 15px white
 
+h1,h2,h3,h4,h5,h6
+  font-weight: bold
 
 nav
   margin: 30px
@@ -54,10 +56,14 @@ nav
     color: black
     margin-left: 20px
     margin-right: 20px
-    
-    &:hover
+    transition: 0.5s
+
+    &:hover,&.active
       border-bottom: solid 2px
       text-decoration: none
+      color: black
+    &.active
+      color: #ff8c11
   
   // margin-top: 60px
 
