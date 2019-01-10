@@ -22,8 +22,14 @@
               i.fab.fa-codepen
             a(href="https://github.com/frank890417" target="_blank" title="Github") 
               i.fab.fa-github
+            a(href="https://medium.com/@wucheyu" target="_blank" title="Medium") 
+              i.fab.fa-medium
             a(href="http://issuu.com/wucheyu/docs/2017_portfolio" target="_blank" title="Portfolio on ISSUU") 
               i.fas.fa-book
+              
+            a(href="https://hahow.in/@majer" target="_blank" title="Portfolio on ISSUU") 
+              img(src="/static/img/hahowicon.png" style="width: 23px; margin-top: -5px")
+              
 
             
 
@@ -135,11 +141,12 @@ export default {
   .social-links
     a
       color: black
-      margin-right: 10px
+      margin-left: 6px
+      margin-right: 6px
       font-size: 1.2rem
       transition: 0.5s
-      &:hover
-        transform: scale(1.05)
+      &:hover i
+        transform: scale(1.2)
         
     
   //.col-info

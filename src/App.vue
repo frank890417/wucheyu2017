@@ -5,8 +5,8 @@
         .col-sm-12
           nav
             router-link(to="/" :class="{active: $route.path=='/'}") Index
-            //- router-link(to="/about" :class="{active: $route.path=='/about'}") About
-            //- router-link(to="/work" :class="{active: $route.path=='/work'}") Works
+            router-link(to="/about" :class="{active: $route.path=='/about'}") About
+            router-link(to="/work" :class="{active: $route.path=='/work'}") Works
             router-link(to="/experiment" :class="{active: $route.path=='/experiment'}") Experiments
             router-link(to="/research" :class="{active: $route.path=='/research'}") Research
             a(href="/static/Che-Yu Wu Resume.pdf" :class="{active: $route.path=='/resume'}") Resume
