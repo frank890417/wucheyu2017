@@ -27,7 +27,7 @@ var vm = new Vue({
 })
 setTimeout(() => {
   store.commit("setLoading",false)
-}, 1500);
+}, 100);
 
 Vue.mixin({
   methods: {

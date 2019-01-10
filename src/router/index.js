@@ -2,6 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import pageIndex from '@/components/pages/pageIndex'
 import pageAbout from '@/components/pages/pageAbout'
+import pageExperiment from '@/components/pages/pageExperiment'
+import pageResearch from '@/components/pages/pageResearch'
 import pageProject from '@/components/pages/pageProject'
 import pageProjectEdit from '@/components/pages/pageProjectEdit'
 
@@ -15,9 +17,21 @@ export default new Router({
       name: 'index',
       component: pageIndex
     }, {
-      path: '/',
+      path: '/about',
       name: 'about',
       component: pageAbout
+    }, {
+      path: '/research',
+      name: 'research',
+      component: pageResearch
+    }, {
+      path: '/experiment',
+      name: 'experiment',
+      component: pageExperiment
+    }, {
+      path: '/work',
+      name: 'work',
+      component: pageIndex
     }, {
       path: '/manage',
       name: 'project_edit',

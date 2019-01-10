@@ -1,6 +1,6 @@
 <template lang="pug">
 .page-loading
-  img.animated.fadeIn(src="/static/img/cover.png")
+  //- img.animated.fadeIn(src="/static/img/cover.png")
   
 </template>
 
@@ -17,7 +17,7 @@ export default {
   top: 0
   width: 100vw
   height: 100vh
-  background-color: #191817
+  // background-color: #191817
   z-index: 4
   display: flex
   justify-content: center

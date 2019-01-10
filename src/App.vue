@@ -1,5 +1,15 @@
 <template lang="pug">
   #app
+    .container-fluid
+      .row
+        .col-sm-12
+          nav
+            router-link(to="/") Index
+            router-link(to="/about") About
+            router-link(to="/work") Works
+            router-link(to="/experiment") Experiments
+            router-link(to="/research") Research
+            a(href="/static/Che-Yu Wu Resume.pdf") Resume
     transition(name="page" , mode="out-in")
       pageLoading(v-if="loading")
     transition(name="page" , mode="out-in")
@@ -37,6 +47,17 @@ body
   // border: solid 15px white
 
 
+nav
+  margin: 30px
+  font-weight: bold
+  a
+    color: black
+    margin-left: 20px
+    margin-right: 20px
+    
+    &:hover
+      border-bottom: solid 2px
+      text-decoration: none
   
   // margin-top: 60px
 
