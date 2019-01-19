@@ -7,6 +7,16 @@ import store from './store'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import SoftScroll from './plugins/soft_scroll.js' 
+// import p5 from 'p5'
+import VueAnalytics from 'vue-analytics'
+
+if (document.domain == "wucheyu.monoame.com") {
+  Vue.use(VueAnalytics, {
+    id: 'UA-52977512-26',
+    router
+  })
+}
+
 SoftScroll.init()
 // import Tether from "tether"
 // import $ from "jquery"

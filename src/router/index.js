@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import pageIndex from '@/components/pages/pageIndex'
+import pageWorks from '@/components/pages/pageWorks'
 import pageAbout from '@/components/pages/pageAbout'
 import pageExperiment from '@/components/pages/pageExperiment'
 import pageResearch from '@/components/pages/pageResearch'
@@ -31,7 +32,7 @@ export default new Router({
     }, {
       path: '/work',
       name: 'work',
-      component: pageIndex
+      component: pageWorks
     }, {
       path: '/manage',
       name: 'project_edit',
