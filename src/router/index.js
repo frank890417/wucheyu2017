@@ -16,7 +16,7 @@ export default new Router({
     {
       path: '/',
       name: 'index',
-      component: pageIndex
+      component: pageWorks
     }, {
       path: '/about',
       name: 'about',
