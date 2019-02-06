@@ -1,46 +1,55 @@
 <template lang="pug">
-  .page-edit
-    .container-fluid
+  .page-edit.page-project-edit
+    .container-fluid.pt-5
       .row
-        .col-sm-12
-
         .col-sm-3.col-list
-          ul.breadcrumb
+          //ul.breadcrumb
             li.breadcrumb-item
               router-link(to="/", target="_blank") 管理
             li.breadcrumb-item 編輯專案
-          ul.list-group.text-left(style="height: 600px; overflow: scroll")
-            li.list-group-item(v-for="(w,wid) in works", @click="nowId=wid", :class="{active:nowId==wid}")
+          el-button.pt-4.pb-4(@click="addItem" type="primary" style="width: 100%") + Add Item 
+          ul.list-group.text-left
+            li.list-group-item(v-for="(w,wid) in sortedWorks", @click="nowId=w.uid", :class="{active:nowId==w.uid}")
               .row
-                .col-10 {{w.title}}
+                .col-10
+                  span {{wid+1}}. 
+                  span {{w.title}}
                 .col-2
                   .btn.btn-danger.btn-xs(@click="removeItem(wid)") -
-            li.list-group-item(@click="addItem") + Add Item 
-          button.btn.btn-primary.form-control(@click="saveAll") Save all!
-        .col-sm-9.offset-3(v-if="work", :key="nowId")
-          .container.text-left
+                .col-2
+                  el-input.input-order-number(type="number" v-model="w.order")
+        .col-sm-3
+          
+        .col-sm-9(v-if="work", :key="nowId")
+          .container-fluid.text-left
             .row
               .col-sm-12
-                h2 {{work.title}}
-                  router-link.btn.btn-secondary.float-right(:to="'/project/'+nowId", target="_blank") Open Project
+                
+                h2
+                  .row
+                    .col-9
+                      el-input.input-title(v-model="work.title")
+                    .col-3
+                      router-link.btn.btn-secondary.float-right(:to="'/project/'+nowId", target="_blank") Open Project
+                      button.btn.btn-primary.float-right.mr-2(@click="saveAll") Save
                 hr
                 
-            .row
-              .col-sm-4
-                el-form(label-width="100px")
-                  el-form-item(label="title")
+            .row.pt-3
+              .col-sm-3
+                el-form(label-width="60px")
+                  //el-form-item(label="title")
                     el-input(v-model="work.title")
-                  el-form-item(label="date")
-                    el-input(v-model="work.date")
-                  el-form-item(label="link")
+                  //- el-form-item(label="順序")
+                    el-input(v-model="work.order")
+                  el-form-item(label="連結")
                     el-input(v-model="work.link")
-                  el-form-item(label="color")
+                  el-form-item(label="顏色")
                     el-color-picker(v-model="work.color")
-                  el-form-item(label="client")
+                  el-form-item(label="客戶")
                     el-input(v-model="work.client")
-                  el-form-item(label="Catagory")
-                    el-input(v-model="work.type")
                   el-form-item(label="類別")
+                    el-input(v-model="work.type")
+                  el-form-item(label="Tag")
                     el-select(v-model="work.cata"
                               multiple
                               filterable
@@ -52,9 +61,9 @@
                         :key="item"
                         :label="item"
                         :value="item")
-                  el-form-item(label="work")
+                  el-form-item(label="職責")
                     el-input(v-model="work.work")
-                  el-form-item(label="cover")
+                  el-form-item(label="封面")
                     el-input(v-model="work.cover")
                     .row
                       .col-sm-3
@@ -67,15 +76,16 @@
                           :show-file-list="false"
                         )
                           i(class="el-icon-plus avatar-uploader-icon")
-              .col-sm-8
+                  el-form-item(label="日期")
+                    el-input(v-model="work.date")
+              .col-sm-9
                 el-form
                   el-form-item(label="")
                     VueEditor.ve(:id ="'content'", v-model="work.content" ,
                       :useCustomImageHandler="true",
                       @imageAdded="handleImageAdded" ,
-                      style="height: 600px;margin-bottom: 50px")
+                      style="height: 700px;margin-bottom: 50px")
                     //- el-input(v-model="work.content", type="textarea")
-              .col-sm-12
           
 </template>
 
@@ -88,7 +98,14 @@ export default {
     return {
       nowId: 0,
       defaut_hashtags: [
-        "UI","UX","CIS","Graphics","Website","Installation Art","3D","Animation","Project","Hackthon"
+        "Graphic Design",
+        "UI/UX",
+        "Hardware",
+        "Web Development",
+        "Sound Experiment",
+        "3D Modeling",
+        "Animation",
+        "Arts"
       ]
     }
   },
@@ -98,12 +115,28 @@ export default {
       if (this.nowId!=-1)
         return this.works[this.nowId]
       return null
+    },
+    sortedWorks(){
+      let result= Object.entries(this.works)
+                   .sort((a,b)=>a[1].order-b[1].order).map(p=>({uid: p[0],...p[1]}))
+      result.forEach((w,wid)=>{
+        w.order = wid
+      }) 
+      return result     
     }
+  },
+  mounted(){
+    Object.entries(this.works).forEach((w,wid)=>{
+      if (!w[1].order){
+        this.$set(w[1],"order",wid+1)
+        // w[1].order=wid
+      }
+    })
   },
   methods: {
     save(){
       var workRef = window.firebase.database().ref('works/' + this.nowId);
-      console.log(this.work)
+      // console.log(this.work)
 
       workRef.set(this.work)
     },
@@ -136,6 +169,7 @@ export default {
       
     },
     saveAll(){
+
       var worksRef = window.firebase.database().ref('works');
       // console.log(this.work)
       worksRef.set(this.works)
@@ -193,26 +227,85 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="sass">
-
-h1
-  font-weight: 900
-.page-edit
-  padding-top: 50px
-.cover
-  height: 400px
-  background-color: #eee
-  margin-top: 30px
-  margin-bottom: 50px
-.col-list
-  position: fixed
-.col-content
-  img
-    margin-top: 30px
-    margin-bottom: 30px
-    width: 100%
-    min-height: 300px
+<style lang="sass">
+.page-project-edit
+  overflow: hidden
+  h1
+    font-weight: 900
+  .page-edit
+    padding-top: 50px
+  .cover
+    height: 400px
     background-color: #eee
-.list-group-item
-  cursor: pointer
+    margin-top: 30px
+    margin-bottom: 50px
+  // .col-list
+    // position: fixed
+  .col-content
+    img
+      margin-top: 30px
+      margin-bottom: 30px
+      width: 100%
+      min-height: 300px
+      background-color: #eee
+  .list-group-item
+    cursor: pointer
+    font-size: 1rem
+    font-weight: 600
+  label.el-form-item__label
+    font-weight: 900
+    
+  .el-input.input-title
+    font-size: 2.4rem
+    color: black
+    height: auto
+    input
+      border: none
+      font-weight: bold
+      color: #333
+    .el-input__inner
+      border: none
+      padding: 0
+
+  .col-list
+    position: fixed
+    background-color: #333
+    color: white
+    height: 100vh
+    left: 0
+    top: 0
+    z-index: 10
+    padding: 0
+    display: flex
+    flex-direction: column-reverse
+    justify-content: space-between
+    padding-top: 5vh
+    .el-button
+      margin: 0
+    .list-group
+      overflow: scroll
+    .list-group-item
+      background-color: transparent
+      border: none
+      border-bottom: 1px solid rgba(white,0.3)
+      &:hover
+        background-color: rgba(#aaa,0.3)
+      &.active
+        background-color: rgba(#666,1)
+    .list-group-item
+      .btn.btn-danger
+        opacity: 0
+      &:hover
+        .btn.btn-danger
+          opacity: 1
+  .input-order-number
+    background-color: transparent
+    padding: 0
+    input
+      background-color: transparent
+      padding: 0
+      border: solid 1px rgba(white,0.3)
+      text-align: center
+      color: white
+
 </style>

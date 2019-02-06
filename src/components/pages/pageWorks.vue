@@ -4,9 +4,9 @@
 
       .row.row-info
         .col-sm-12.col-info.text-center
-          img.head.animated.fadeIn(src="/static/img/head.jpg")
+          img.head.animated.fadeIn(src="/static/img/head2.jpg")
           h1 Che Yu Wu
-          h5.mt-1.mb-1 Interaction Designer, Creative Engineer, Graphic Designer
+          h5.mt-1 Interaction Designer, Creative Engineer, Graphic Designer
           pre MS in Integrated Digital Media @ New York University
           //- h2 Portfolio
           //- p "Designing is a way to discover the world for me."
@@ -33,18 +33,18 @@
 
             
 
-      .row.row-work.mt-4.mb-5
-        router-link.col-xs-12.col-sm-12.col-md-12.col-lg-6.col-work.animated.fadeIn.mb-5.mt-3(
-            v-for="(work,wid) in works", 
-            :to="`/project/${wid}`", 
-            :key="wid"
+      .row.row-work.mt-3.mb-4
+        router-link.col-xs-12.col-sm-12.col-md-12.col-lg-6.col-work.animated.fadeIn.mb-4.mt-2(
+            v-for="(work,wid) in sortedWorks", 
+            :to="`/project/${work.uid}`", 
+            :key="work.uid"
             
           )
           .work(
             :style="cssbg(work.cover)")
           .tags
             .tag(v-for="tag in work.cata") {{tag}}
-            h6 {{ work.date }}
+            //- h6 {{ work.date }}
             
           h5 {{work.title}}
               
@@ -63,7 +63,11 @@ export default {
     }
   },
   computed: {
-    ...mapState(["works"])
+    ...mapState(["works"]),
+    sortedWorks(){
+      return Object.entries(this.works)
+                   .sort((a,b)=>a[1].order-b[1].order).map(p=>({uid: p[0],...p[1]}))
+    }
   },
   methods:{
     cssbg(url) {

@@ -3,7 +3,7 @@
     .container-fluid
       .row
         .col-sm-12
-          nav
+          nav(v-if="!$route.path.includes('manage') && !$route.path.includes('/project/')")
             //- router-link(to="/" :class="{active: $route.path=='/'}") Index
             //- router-link(to="/about" :class="{active: $route.path=='/about'}") About
             router-link(to="/" :class="{active: $route.path=='/'}") Works

@@ -4,7 +4,9 @@
       .row
         .col-sm-12
           .cover(:style="cssbg(work.cover)")
-            router-link.btn-back(to="/") Back
+            router-link.btn-back(to="/") 
+              i.fa.fa-angle-left.mr-3
+              span Back to Works
       .container.content-area
         .row(v-if="work")
           .col-sm-12
@@ -112,8 +114,16 @@ export default {
   h1, h2 
     font-weight: normal
   h1
-    font-weight: 900
+    font-weight: bold
     margin-bottom: 30px
+  h2,h3,h4
+    font-weight: bold
+    margin-top: 50px
+  // p
+    // margin-top: 10px
+  // h2
+  //   border-bottom: 4px solid #000
+
 
 
 

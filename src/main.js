@@ -17,7 +17,7 @@ if (document.domain == "wucheyu.monoame.com") {
   })
 }
 
-SoftScroll.init()
+// SoftScroll.init()
 // import Tether from "tether"
 // import $ from "jquery"
 // window.jQuery = $
