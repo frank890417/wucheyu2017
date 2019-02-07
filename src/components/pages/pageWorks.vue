@@ -4,50 +4,38 @@
 
       .row.row-info
         .col-sm-12.col-info.text-center
+          
           img.head.animated.fadeIn(src="/static/img/head2.jpg")
-          h1 Che Yu Wu
+          h1 Che-Yu Wu
           h5.mt-1 Interaction Designer, Creative Engineer, Graphic Designer
           pre MS in Integrated Digital Media @ New York University
-          //- h2 Portfolio
-          //- p "Designing is a way to discover the world for me."
-          p Devoted to full-stack development, generative arts, immersive user experience design and tutoring.<br><br>
+          p Devoted to full-stack development, sound synthesis, generative arts, immersive user experience design and tutoring.<br><br>
             //p In this portfolio are works of CIS visual identity, interactive web pages, 3D animation, and physical devices. Design is a means through which I explore the world. I thus intend to create unique works by exploiting innovation and all kinds of possibilities and draw inspiration from different professional fields. More work examples can be accessed on Monoame: http://wucheyu.monoame.com/
+          social-links
 
-          .social-links
-            a(href="https://www.linkedin.com/in/cheyuwu/?locale=en_US" target="_blank" title="Linkedin") 
-              i.fab.fa-linkedin-in
-            a(href="mailto:cyw345@nyu.edu" target="_blank" title="Envelope") 
-              i.far.fa-envelope
-            a(href="https://codepen.io/frank890417" target="_blank" title="Codepen") 
-              i.fab.fa-codepen
-            a(href="https://github.com/frank890417" target="_blank" title="Github") 
-              i.fab.fa-github
-            a(href="https://medium.com/@wucheyu" target="_blank" title="Medium") 
-              i.fab.fa-medium
-            a(href="http://issuu.com/wucheyu/docs/2017_portfolio" target="_blank" title="Portfolio on ISSUU") 
-              i.fas.fa-book
-              
-            a(href="https://hahow.in/@majer" target="_blank" title="Portfolio on ISSUU") 
-              img(src="/static/img/hahowicon.png" style="width: 23px; margin-top: -5px")
-              
-
-            
-
+      .row 
+        .col-sm-12
+          .catas
+            .cata(@click="currentTag=''", :class="{active: !currentTag}") All
+            .cata(v-for="tag in defaut_hashtags",
+                  @click="currentTag = tag",
+                 :class="{active: currentTag==tag}") {{tag}}
+      
       .row.row-work.mt-3.mb-4
         router-link.col-xs-12.col-sm-12.col-md-12.col-lg-6.col-work.animated.fadeIn.mb-4.mt-2(
             v-for="(work,wid) in sortedWorks", 
             :to="`/project/${work.uid}`", 
-            :key="work.uid"
+            :key="work.uid",
+            v-if="!currentTag || work.cata.indexOf(currentTag)!=-1"
             
           )
+            
           .work(
             :style="cssbg(work.cover)")
           .tags
             .tag(v-for="tag in work.cata") {{tag}}
-            //- h6 {{ work.date }}
-            
-          h5 {{work.title}}
               
+          h5.mt-2 {{work.title}}
      
           
 
@@ -55,15 +43,17 @@
 
 <script>
 import { mapState } from 'vuex'
+import socialLinks from '@/components/socialLinks'
 export default {
   name: 'HelloWorld',
   data () {
     return {
       msg: 'Welcome to Your Vue.js App',
+      currentTag: ""
     }
   },
   computed: {
-    ...mapState(["works"]),
+    ...mapState(["works","defaut_hashtags"]),
     sortedWorks(){
       return Object.entries(this.works)
                    .sort((a,b)=>a[1].order-b[1].order).map(p=>({uid: p[0],...p[1]}))
@@ -88,6 +78,9 @@ export default {
         ...a,...b
       }
     }
+  },
+  components: {
+    'social-links': socialLinks
   }
 }
 </script>
@@ -95,6 +88,8 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="sass">
 .page-works
+
+
   .container
     max-width: 1320px
   a
@@ -137,19 +132,25 @@ export default {
     letter-spacing: 1px
     margin-top: 10px
 
-
-
-  .social-links
-    a
-      color: black
-      margin-left: 6px
-      margin-right: 6px
-      font-size: 1.2rem
+  .catas
+    .cata
+      display: inline-block
+      background-color: #eee
+      // border: 1px solid #eee
+      font-size: 1rem
+      margin: 5px
+      border-radius: 50px
+      padding: 3px 18px
+      cursor: pointer
       transition: 0.5s
-      &:hover i
-        transform: scale(1.2)
-        
-    
+      font-weight: bold
+      color: #666
+      &:hover
+        background-color: #eee
+      &.active
+        background-color: #ff8c11
+        color: white
+
   //.col-info
     position: fixed
     left: 30px
@@ -253,7 +254,7 @@ export default {
         font-weight: 500
         border-radius: 50px
         margin-top: 25px
-        font-size: 16px
+        font-size: 15px
       h6
         position: absolute
         // right: 0

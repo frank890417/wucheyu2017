@@ -152,7 +152,7 @@ export default {
       background-color: #eee
 
   label
-    width: 150px
+    width: 140px
     font-weight: 600
     &:after
       content: ":"

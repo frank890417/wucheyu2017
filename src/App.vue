@@ -9,21 +9,28 @@
             router-link(to="/" :class="{active: $route.path=='/'}") Works
             router-link(to="/experiment" :class="{active: $route.path=='/experiment'}") Experiments
             router-link(to="/research" :class="{active: $route.path=='/research'}") Research
-            a(href="/static/Che-Yu Wu Resume.pdf" :class="{active: $route.path=='/resume'}") Resume
+            a(href="/static/Che-Yu Wu Resume.pdf" target="blank" :class="{active: $route.path=='/resume'}") Resume
     transition(name="page" , mode="out-in")
       pageLoading(v-if="loading")
     transition(name="page" , mode="out-in")
       router-view(:key="$route.path")
+    .row.copyright
+      .col-sm-12.mt-5.pt-5.pb-5
+        h5 Copyright© Che-Yu Wu, 2019
+        .text-center.mt-4
+          social-links
 </template>
 
 <script>
 import pageLoading from '@/components/pages/pageLoading'
+import socialLinks from '@/components/socialLinks'
 import {mapState} from 'vuex'
 
 export default {
   name: 'app',
   components: {
-    pageLoading
+    pageLoading,
+    'social-links': socialLinks
   },
   computed: {
     ...mapState(['loading'])
@@ -102,5 +109,26 @@ nav
   opacity: 0
   // &:before
   //   top: 0
+
+
+
+
+
+
+.social-links
+  a
+    color: black
+    margin-left: 6px
+    margin-right: 6px
+    font-size: 1.2rem
+    transition: 0.5s
+    &:hover i
+      transform: scale(1.2)
+        
+.copyright
+  opacity: 0.6
+  h5
+    font-weight: normal
+
 
 </style>

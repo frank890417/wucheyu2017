@@ -1,10 +1,11 @@
 <template lang="pug">
 .page.page-experiment.pt-5
-  .container
-    .row
-      .col-sm-12(v-for='expr in experiments').mb-5
+  .container-fluid
+    .row(v-for='expr in experiments').mb-5
+      .col-sm-4.text-center
         h4 {{expr.title}}
         pre {{expr.date}}
+      .col-sm-8
         iframe(:src="expr.src" )
         
 </template>

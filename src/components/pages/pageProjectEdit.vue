@@ -11,7 +11,7 @@
           ul.list-group.text-left
             li.list-group-item(v-for="(w,wid) in sortedWorks", @click="nowId=w.uid", :class="{active:nowId==w.uid}")
               .row
-                .col-10
+                .col-8
                   span {{wid+1}}. 
                   span {{w.title}}
                 .col-2
@@ -97,20 +97,11 @@ export default {
   data () {
     return {
       nowId: 0,
-      defaut_hashtags: [
-        "Graphic Design",
-        "UI/UX",
-        "Hardware",
-        "Web Development",
-        "Sound Experiment",
-        "3D Modeling",
-        "Animation",
-        "Arts"
-      ]
+      
     }
   },
   computed:{
-    ...mapState(['works']),
+    ...mapState(['works','defaut_hashtags']),
     work(){
       if (this.nowId!=-1)
         return this.works[this.nowId]

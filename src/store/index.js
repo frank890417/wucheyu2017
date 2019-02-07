@@ -6,7 +6,18 @@ export default new Vuex.Store({
 
   state: {
     works: [],
-    loading: true
+    loading: true,
+    defaut_hashtags: [
+      "Visual",
+      "UI/UX",
+      "Hardware",
+      "Development",
+      "Sound",
+      "3D",
+      "Animation",
+      "Arts",
+      "Project"
+    ]
   },
   mutations: {
     setWorks(state, value){
