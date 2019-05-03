@@ -45,6 +45,11 @@ export default {
 
 <style lang="sass">
 
+canvas
+  position: absolute
+  z-index: -1
+  left: 0
+  top: 0
 body
   font-family: 'Avenir', Helvetica, Arial, sans-serif !important
   -webkit-font-smoothing: antialiased
@@ -53,6 +58,8 @@ body
   // color: #2c3e50
   background-color: #fff
   overflow-y: scroll
+.page
+  min-height: 100vh
   // height: auto
   // height: 100vh
   // overflow: hidden
