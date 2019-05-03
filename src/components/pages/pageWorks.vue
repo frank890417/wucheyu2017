@@ -2,17 +2,6 @@
   .page.page-works
     .container
 
-      .row.row-info
-        .col-sm-12.col-info.text-center
-          
-          img.head.animated.fadeIn(src="/static/img/head2.jpg")
-          h1 Che-Yu Wu
-          h5.mt-1 Interaction Designer, Creative Engineer, Graphic Designer
-          pre MS in Integrated Digital Media @ New York University
-          p Devoted to full-stack development, sound synthesis, generative arts, immersive user experience design and tutoring.<br><br>
-            //p In this portfolio are works of CIS visual identity, interactive web pages, 3D animation, and physical devices. Design is a means through which I explore the world. I thus intend to create unique works by exploiting innovation and all kinds of possibilities and draw inspiration from different professional fields. More work examples can be accessed on Monoame: http://wucheyu.monoame.com/
-          social-links
-
       .row 
         .col-sm-12
           .catas
@@ -32,10 +21,10 @@
             
           .work(
             :style="cssbg(work.cover)")
-          .tags
+          //.tags
             .tag(v-for="tag in work.cata") {{tag}}
               
-          h5.mt-2 {{work.title}}
+          h5.mt-4 {{work.title}}
      
           
 
@@ -166,12 +155,7 @@ export default {
       top: 0
       border: none
 
-    
-  .row-info
-    padding: 20px
-    display: flex
-    justify-content: center
-    // align-items: center
+   
   .row-work
     padding: 20px
     text-align: left

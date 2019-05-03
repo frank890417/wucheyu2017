@@ -1,92 +1,103 @@
 <template lang="pug">
   .page.page-about
-    .container-fluid.pt-5.content
+    .container.pt-5.content
       .row
         .col-sm-12
+      .row.row-info
+        .col-sm-12.col-info.text-left
+          
+          img.head.animated.fadeIn(src="/static/img/head2.jpg")
+          h1 Che-Yu Wu
+          h5.mt-1 Interaction Designer, Creative Engineer, Graphic Designer
+          pre MS in Integrated Digital Media @ New York University
+          p Devoted to full-stack development, sound synthesis, generative arts, immersive user experience design and tutoring.<br><br>
+            //p In this portfolio are works of CIS visual identity, interactive web pages, 3D animation, and physical devices. Design is a means through which I explore the world. I thus intend to create unique works by exploiting innovation and all kinds of possibilities and draw inspiration from different professional fields. More work examples can be accessed on Monoame: http://wucheyu.monoame.com/
+          social-links
+
           //- h3 吳哲宇 (Che-Yu Wu)
           
-          ul.yearlist
+          //- ul.yearlist
 
-            li
-              .year 2018-
-              h4 紐約大學
-              h5 Integrated Digital Media研究助理 
-              p 
-                ul 
-                  li Creative Coding TA
+          //-   li
+          //-     .year 2018-
+          //-     h4 紐約大學
+          //-     h5 Integrated Digital Media研究助理 
+          //-     p 
+          //-       ul 
+          //-         li Creative Coding TA
                   
-            li
-              .year 2018 
-              h4 清大科技藝術研究中心
-              h5 系統開發工程師
-              p 
-                ul 開發印象清華網站與作品即時互動系統(socket.io)
-                  li 蘑菇總動員
-                  li 英文8-2
+          //-   li
+          //-     .year 2018 
+          //-     h4 清大科技藝術研究中心
+          //-     h5 系統開發工程師
+          //-     p 
+          //-       ul 開發印象清華網站與作品即時互動系統(socket.io)
+          //-         li 蘑菇總動員
+          //-         li 英文8-2
                 
-            li
-              .year 2016 - 2018
-              h4 Hahow 好學校
-              p
-                ul
-                  li 「動態互動網頁程式入門」(2016) 
-                  li 「動態互動網頁特效入門」(2018) 課程
-                  li 累積超過6900位學生
-            li
-              .year 2015 - 2018
-              h4 墨雨設計
-              p 創辦人 / 設計師 / 全端工程師
-                ul
-                  li 2018 n3xtcon 品牌設計與網頁開發
-                  li 2017 - 2018 Dschool 台大創新設計學院官網 設計/開發
-                  li 2017 工研院綠能所  -  家庭用電家計簿 網頁設計 / 開發
-                  li 2017 質。感  台中紀事展覽網頁開發
-                  li 2017 鴻海集團 睿軒檢驗 / 睿田生技 官網開發
-                  li 2017 北市捷運局 台北聲音地景計畫 互動網頁設計/開發
-                  li 2017 - 2018 雜學校網頁 設計/開發
-                  li 2017 交大創業日論壇活動 CIS / 海報設計
-                  li 2016 花旗聯合勸募官網 網頁設計/開發
-                  li 2016 複雜生活節 網頁設計/開發
-                  li 2015 Selinko + Remy Mertin 中國活動 APP UI 設計
-                  li 2014 - 2016 國際美容化妝品展 網頁設計/開發
-                  li 2015 世界健康大會 網頁設計
-                  li 2014 長庚石墨烯醫療技術發表 3D動畫製作
-            li
-              .year 2013 - 2015
-              h4 翔虹資訊顧問有限公司
-              h5 製圖、自動化開發
-              p
-                ul
-                  li 面板製造自動化製圖程式開發
-                  li 工廠設備彩現圖製作
-                  li 電梯3D目錄用彩現圖製作
+          //-   li
+          //-     .year 2016 - 2018
+          //-     h4 Hahow 好學校
+          //-     p
+          //-       ul
+          //-         li 「動態互動網頁程式入門」(2016) 
+          //-         li 「動態互動網頁特效入門」(2018) 課程
+          //-         li 累積超過6900位學生
+          //-   li
+          //-     .year 2015 - 2018
+          //-     h4 墨雨設計
+          //-     p 創辦人 / 設計師 / 全端工程師
+          //-       ul
+          //-         li 2018 n3xtcon 品牌設計與網頁開發
+          //-         li 2017 - 2018 Dschool 台大創新設計學院官網 設計/開發
+          //-         li 2017 工研院綠能所  -  家庭用電家計簿 網頁設計 / 開發
+          //-         li 2017 質。感  台中紀事展覽網頁開發
+          //-         li 2017 鴻海集團 睿軒檢驗 / 睿田生技 官網開發
+          //-         li 2017 北市捷運局 台北聲音地景計畫 互動網頁設計/開發
+          //-         li 2017 - 2018 雜學校網頁 設計/開發
+          //-         li 2017 交大創業日論壇活動 CIS / 海報設計
+          //-         li 2016 花旗聯合勸募官網 網頁設計/開發
+          //-         li 2016 複雜生活節 網頁設計/開發
+          //-         li 2015 Selinko + Remy Mertin 中國活動 APP UI 設計
+          //-         li 2014 - 2016 國際美容化妝品展 網頁設計/開發
+          //-         li 2015 世界健康大會 網頁設計
+          //-         li 2014 長庚石墨烯醫療技術發表 3D動畫製作
+          //-   li
+          //-     .year 2013 - 2015
+          //-     h4 翔虹資訊顧問有限公司
+          //-     h5 製圖、自動化開發
+          //-     p
+          //-       ul
+          //-         li 面板製造自動化製圖程式開發
+          //-         li 工廠設備彩現圖製作
+          //-         li 電梯3D目錄用彩現圖製作
 
-            li
-              .year 2013 - 2014
-              h4 三采文化 書籍介紹影片剪輯
-            li
-              .year 2014
-              h4 交大學聯會 行銷部長
-              p
-                ul
-                  li 交大文宣改造計畫
-                  li 交大聖誕樹
-                  a(href="https://www.ettoday.net/news/20141222/442072.htm") 新聞
+          //-   li
+          //-     .year 2013 - 2014
+          //-     h4 三采文化 書籍介紹影片剪輯
+          //-   li
+          //-     .year 2014
+          //-     h4 交大學聯會 行銷部長
+          //-     p
+          //-       ul
+          //-         li 交大文宣改造計畫
+          //-         li 交大聖誕樹
+          //-         a(href="https://www.ettoday.net/news/20141222/442072.htm") 新聞
 
-            li
-              .year 2013 - 2017
-              h4 國立交通大學電機工程學系
-              p Focus on Software Development and communication
-            li
-              .year 2008 - 2012
-              h4 宏碁數位創作獎
-              p 
-                ul
-                  li 第五屆 國中組 首獎
-                  li 第六屆 國中組 首獎
-                  li 第七屆 高中普通組 首獎+評審團大獎
-                  li 第八屆 高中普通組 優勝
-                  li 第九屆 高中專業組 首獎+評審團大獎
+          //-   li
+          //-     .year 2013 - 2017
+          //-     h4 國立交通大學電機工程學系
+          //-     p Focus on Software Development and communication
+          //-   li
+          //-     .year 2008 - 2012
+          //-     h4 宏碁數位創作獎
+          //-     p 
+          //-       ul
+          //-         li 第五屆 國中組 首獎
+          //-         li 第六屆 國中組 首獎
+          //-         li 第七屆 高中普通組 首獎+評審團大獎
+          //-         li 第八屆 高中普通組 優勝
+          //-         li 第九屆 高中專業組 首獎+評審團大獎
 </template>
 
 <script>
@@ -241,6 +252,17 @@ export default {
 <style lang="sass">
 .page-about
   line-height: 2rem
+
+   
+  .row-info
+    padding: 20px
+    display: flex
+    justify-content: center
+    img
+      // border-radius: 50%
+      width: 150px
+      margin-bottom: 50px
+    // align-items: center
   .background
     position: fixed
     left: 0

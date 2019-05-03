@@ -3,13 +3,18 @@
     .container-fluid
       .row
         .col-sm-12
+          
           nav(v-if="!$route.path.includes('manage') && !$route.path.includes('/project/')")
             //- router-link(to="/" :class="{active: $route.path=='/'}") Index
             //- router-link(to="/about" :class="{active: $route.path=='/about'}") About
-            router-link(to="/" :class="{active: $route.path=='/'}") Works
-            router-link(to="/experiment" :class="{active: $route.path=='/experiment'}") Experiments
-            router-link(to="/research" :class="{active: $route.path=='/research'}") Research
-            a(href="/static/Che-Yu Wu Resume.pdf" target="blank" :class="{active: $route.path=='/resume'}") Resume
+            router-link(to="/")
+              h2 CHE-YU WU
+            div
+              router-link(to="/" :class="{active: $route.path=='/'}") Works
+              router-link(to="/about" :class="{active: $route.path=='/about'}") About
+              router-link(to="/experiment" :class="{active: $route.path=='/experiment'}") Experiments
+              router-link(to="/research" :class="{active: $route.path=='/research'}") Research
+              a(href="/static/Che-Yu Wu Resume.pdf" target="blank" :class="{active: $route.path=='/resume'}") Resume
     transition(name="page" , mode="out-in")
       pageLoading(v-if="loading")
     transition(name="page" , mode="out-in")
@@ -59,6 +64,11 @@ h1,h2,h3,h4,h5,h6
 nav
   margin: 30px
   font-weight: bold
+  display: flex
+  justify-content: space-between
+  h2
+    font-size: 1.5rem
+    font-weight: 900
   a
     color: black
     margin-left: 20px

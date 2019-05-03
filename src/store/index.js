@@ -9,19 +9,20 @@ export default new Vuex.Store({
     loading: true,
     defaut_hashtags: [
       "Visual",
-      "UI/UX",
+      // "UI/UX",
       "Hardware",
-      "Development",
+      // "Development",
       "Sound",
       "3D",
-      "Animation",
-      "Arts",
-      "Project"
+      // "Animation",
+      // "Arts",
+      // "Project"
     ]
   },
   mutations: {
     setWorks(state, value){
       state.works = value
+      
     },
     setLoading(state,value){
       state.loading=value
