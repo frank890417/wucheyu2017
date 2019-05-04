@@ -1,22 +1,27 @@
 <template lang="pug">
   .page-edit.page-project-edit
     .container-fluid.pt-5
+      
       .row
+
         .col-sm-3.col-list
+          div
+
           //ul.breadcrumb
             li.breadcrumb-item
               router-link(to="/", target="_blank") 管理
             li.breadcrumb-item 編輯專案
           el-button.pt-4.pb-4(@click="addItem" type="primary" style="width: 100%") + Add Item 
           ul.list-group.text-left
-            li.list-group-item(v-for="(w,wid) in sortedWorks", @click="nowId=w.uid", :class="{active:nowId==w.uid}")
+            li.list-group-item(v-for="(w,wid) in sortedWorks", @click="nowId=w.uid", :class="{active:nowId==w.uid, show: w.show}")
               .row
-                .col-8
+                .col-11
                   span {{wid+1}}. 
                   span {{w.title}}
-                .col-2
-                  .btn.btn-danger.btn-xs(@click="removeItem(wid)") -
-                .col-2
+                .col-1
+                  span(@click="removeItem(wid)")
+                    i.fas.fa-trash
+                //.col-2
                   el-input.input-order-number(type="number" v-model="w.order")
         .col-sm-3
           
@@ -43,7 +48,9 @@
                     el-input(v-model="work.order")
                   el-form-item(label="連結")
                     el-input(v-model="work.link")
-                  el-form-item(label="顏色")
+                  el-form-item(label="顯示")
+                    el-switch(v-model="work.show")
+                  //el-form-item(label="顏色")
                     el-color-picker(v-model="work.color")
                   el-form-item(label="客戶")
                     el-input(v-model="work.client")
@@ -92,6 +99,9 @@
 <script>
 import { mapState } from 'vuex'
 import { VueEditor } from 'vue2-editor'
+const Compress = require('compress.js')
+
+
 export default {
   components: {VueEditor},
   data () {
@@ -177,12 +187,28 @@ export default {
       var spaceRef = storageRef.child(`images/${this.work.title}/cover.jpg`);
       // console.log(event.file)
       let _this = this
-      spaceRef.put(event.file).then(function(snapshot) {
-        console.log('Uploaded a blob or file!');
-        console.log(snapshot.downloadURL)
-        _this.$message('封面上傳成功');
-        _this.work.cover=snapshot.downloadURL
-      });
+      
+      const compress = new Compress();
+      compress.compress([event.file], {
+        size: 4, // the max size in MB, defaults to 2MB
+        quality: 1, // the quality of the image, max is 1,
+        maxWidth: 1920, // the max width of the output image, defaults to 1920px
+        //- maxHeight: 1920, // the max height of the output image, defaults to 1920px
+        resize: true // defaults to true, set false if you do not want to resize the image width and height
+      }).then((data) => {
+        // returns an array of compressed images
+        console.log(data)
+
+        let compressedFile = Compress.convertBase64ToFile(data[0].data,data[0].ext)
+        spaceRef.put(compressedFile).then(function(snapshot) {
+          console.log('Uploaded a blob or file!');
+          console.log(snapshot.downloadURL)
+          _this.$message('封面上傳成功');
+          _this.work.cover=snapshot.downloadURL
+        });
+      })
+
+      
       
     }, 
     handleImageAdded(file, Editor, cursorLocation) {
@@ -194,7 +220,6 @@ export default {
       // formData.append('file', file)
       // console.log(file)
 
-
       var storage = firebase.app().storage("gs://wucheyu-portfolio.appspot.com");
       var storageRef = storage.ref();
       // Child references can also take paths delimited by '/'
@@ -202,13 +227,26 @@ export default {
       var spaceRef = storageRef.child(`images/${this.work.title}/img/${randomFileName}.jpg`);
       // console.log(event.file)
       let _this = this
-      spaceRef.put(file).then(function(snapshot) {
-        console.log('Uploaded a blob or file!');
-        console.log(snapshot.downloadURL)
-        _this.$message('圖片上傳成功');
-        Editor.insertEmbed(cursorLocation, 'image', snapshot.downloadURL);
-        // _this.work.cover=snapshot.downloadURL
-      });
+
+      const compress = new Compress();
+      compress.compress([file], {
+        size: 4, // the max size in MB, defaults to 2MB
+        quality: 1, // the quality of the image, max is 1,
+        maxWidth: 1920, // the max width of the output image, defaults to 1920px
+        //- maxHeight: 1920, // the max height of the output image, defaults to 1920px
+        resize: true // defaults to true, set false if you do not want to resize the image width and height
+      }).then((data) => {
+        // returns an array of compressed images
+        console.log(data)
+        let compressedFile = Compress.convertBase64ToFile(data[0].data,data[0].ext)
+        spaceRef.put(compressedFile).then(function(snapshot) {
+          console.log('Uploaded a blob or file!');
+          console.log(snapshot.downloadURL)
+          _this.$message('圖片上傳成功');
+          Editor.insertEmbed(cursorLocation, 'image', snapshot.downloadURL);
+          // _this.work.cover=snapshot.downloadURL
+        });
+      })
 
      
     }
@@ -241,7 +279,7 @@ export default {
       background-color: #eee
   .list-group-item
     cursor: pointer
-    font-size: 1rem
+    font-size: 0.8rem
     font-weight: 600
   label.el-form-item__label
     font-weight: 900
@@ -274,15 +312,18 @@ export default {
     .el-button
       margin: 0
     .list-group
-      overflow: scroll
+      overflow-Y: auto
     .list-group-item
       background-color: transparent
       border: none
       border-bottom: 1px solid rgba(white,0.3)
+      opacity: 0.3
       &:hover
         background-color: rgba(#aaa,0.3)
       &.active
         background-color: rgba(#666,1)
+      &.show
+        opacity: 1
     .list-group-item
       .btn.btn-danger
         opacity: 0

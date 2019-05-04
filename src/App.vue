@@ -58,6 +58,8 @@ body
   // color: #2c3e50
   background-color: #fff
   overflow-y: scroll
+
+  overflow-x: hidden
 .page
   min-height: 100vh
   // height: auto

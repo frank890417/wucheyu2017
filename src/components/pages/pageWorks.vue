@@ -46,6 +46,7 @@ export default {
     sortedWorks(){
       return Object.entries(this.works)
                    .sort((a,b)=>a[1].order-b[1].order).map(p=>({uid: p[0],...p[1]}))
+                   .filter(w=>w.show)
     }
   },
   methods:{
@@ -127,6 +128,7 @@ export default {
     opacity: 0.4
     // letter-spacing: 1px
     margin-top: 10px
+    font-weight: 500
     line-height: 1.5
 
   .catas
