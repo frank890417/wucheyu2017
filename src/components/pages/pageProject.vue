@@ -11,6 +11,7 @@
         .row(v-if="work")
           .col-sm-12
             h1 {{work.title}}
+            
         .row
           .col-sm-12.col-content
             ul.text-left
@@ -57,7 +58,12 @@ export default {
   computed:{
     ...mapState(['works']),
     work(){  
-      return this.works[this.$route.params.id]
+      if (isNaN(this.$route.params.id)){
+        let toComp = (title)=>title.replace(/[\ ]/g,'_').replace(/\//g,'_').replace(/\&/g,'_')
+        return Object.values(this.works).find(w=>toComp(w.title)==toComp(this.$route.params.id))
+      }else{
+        return this.works[this.$route.params.id]
+      }
     },
     projnav(){
       let currentId =  Object.keys(this.works).indexOf(this.$route.params.id)

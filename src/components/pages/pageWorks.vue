@@ -13,7 +13,7 @@
       .row.row-work.mt-3.mb-4
         router-link.col-xs-12.col-sm-12.col-md-12.col-lg-6.col-work.animated.fadeIn.mb-4.mt-2(
             v-for="(work,wid) in sortedWorks", 
-            :to="`/project/${work.uid}`", 
+            :to="`/project/${getProjectName(work.title)}`", 
             :key="work.uid",
             v-if="!currentTag || work.cata.indexOf(currentTag)!=-1"
             
@@ -24,8 +24,8 @@
           //.tags
             .tag(v-for="tag in work.cata") {{tag}}
               
-          h5.mt-4 {{work.title}}
-     
+          h3.mt-4 {{work.title}}
+          h6 {{work.client}}
           
 
 </template>
@@ -49,6 +49,9 @@ export default {
     }
   },
   methods:{
+    getProjectName(title){
+      return title.replace(/[\ ]/g,'_').replace(/\//g,'_').replace(/\&/g,'_')
+    },
     cssbg(url) {
       let use_url = (url && url != '') ? url : '/img/default.jpg'
       let result = {
@@ -78,9 +81,8 @@ export default {
 <style lang="sass">
 .page-works
 
-
   .container
-    max-width: 1320px
+    max-width: 1350px
   a
     color: #333
   h1, h2 
@@ -95,6 +97,11 @@ export default {
   h4
     font-size: 20px
     margin-top: 20px
+  h3
+    font-size: 1.5rem
+    color: #333
+    font-weight: 600
+    line-height: 1.3
 
   h5
     // color: white
@@ -117,9 +124,10 @@ export default {
 
   h6
     // color: white
-    opacity: 0.5
-    letter-spacing: 1px
+    opacity: 0.4
+    // letter-spacing: 1px
     margin-top: 10px
+    line-height: 1.5
 
   .catas
     .cata
@@ -157,9 +165,9 @@ export default {
 
    
   .row-work
-    padding: 20px
+    // padding: 50px 40px
     text-align: left
-    
+    padding-top: 40px
 
   .page-index
     // background-color: black
@@ -173,7 +181,8 @@ export default {
     margin-bottom: 40px
     margin-top: 20px
   .col-work
-    padding: 0px 20px
+    padding: 10px 40px
+
     color: black
 
     &:hover
@@ -182,7 +191,7 @@ export default {
       background-color: #eee
       height: 380px
       display: block
-      border-radius: 2px
+      border-radius: 4px
       // background-image: url(http://www.monoame.com/projects/proj_selinko/main.jpg)
       background-size: cover
       background-position: center center
@@ -191,7 +200,7 @@ export default {
       justify-content: center
       align-items: center
       position: relative
-      box-shadow: 0px 10px 20px -5px rgba(black,0.2)
+      box-shadow: 0px 10px 20px -10px rgba(black,0.3)
       transition-duration: 0.5s
       &:hover
         transform: translateY(-5px)

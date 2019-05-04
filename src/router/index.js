@@ -21,11 +21,13 @@ export default new Router({
       path: '/about',
       name: 'about',
       component: pageAbout
-    }, {
+    }, 
+    {
       path: '/research',
       name: 'research',
       component: pageResearch
-    }, {
+    },
+     {
       path: '/experiment',
       name: 'experiment',
       component: pageExperiment
