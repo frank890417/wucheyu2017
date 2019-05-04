@@ -20,9 +20,9 @@
     transition(name="page" , mode="out-in")
       router-view(:key="$route.path")
     .row.copyright
-      .col-sm-12.mt-5.pt-5.pb-5
-        h5 Copyright© Che-Yu Wu, 2019
-        .text-center.mt-4
+      .col-sm-12.mt-2.pt-1.pb-5
+        label Copyright© Che-Yu Wu, 2019
+        .text-center.mt-3
           social-links
 </template>
 

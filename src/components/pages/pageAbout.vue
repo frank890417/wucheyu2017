@@ -10,8 +10,23 @@
           h5.mt-1 Interaction Designer, Creative Technologist
           pre MS in Integrated Digital Media @ New York University
           br
-          p Devoted to generative arts, immersive user experience design, full-stack development, sound synthesis, and tutoring.<br><br>
-         
+          p Devoted to Creative Coding, immersive user experience design,<br> full-stack development, sound synthesis, and tutoring.
+          ul.mt-4
+            li 
+              b 2019 
+              span  | NYU IDM Graduate Research Assistant @ New York University
+            li 
+              b 2018
+              span  | System Engineer @Research Center for Technology and art, Tsing Hua College
+            li 
+              b 2017
+              span  | Teacher @ Hahow, Startup of Online education
+            li 
+              b 2014-2018
+              span  | Designer / Full-stack Developer @ Monoame Design Studio
+            li 
+              b 2014
+              span  | Cartography and AutoLISP Revelopmer @ Shyang-Horng AutoCAD Tech. Center
           //- social-links
 
 </template>
@@ -53,7 +68,7 @@ function bg(sketch){
     }
 
 
-    sketch.translate(sketch.width/2,sketch.height/2)
+    sketch.translate(sketch.width*1.8/3,sketch.height*1.2/3)
     sketch.stroke(255)
     sketch.noStroke()
     let yy = window.scrollY
@@ -136,8 +151,11 @@ export default {
     padding: 0
     margin: 0
     list-style: none
+
   p
-    opacity: 0.7
+    opacity: 1
+    font-size: 2rem
+    line-height: 1.5
     
   .year
     color: #333
@@ -147,10 +165,17 @@ export default {
     background-color: #fff
     display: inline-block
     padding: 10px
-    
+  h1
+    font-size: 4rem
+    font-weight: 900
   h1,h3
     font-weight: bold
-
+  pre
+    background-color: black
+    color: white
+    display: inline-block
+    padding: 0px 10px
+  
   .yearlist
     list-style: none
     padding: 20px 0px

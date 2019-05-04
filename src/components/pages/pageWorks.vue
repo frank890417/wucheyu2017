@@ -10,8 +10,8 @@
                   @click="currentTag = tag",
                  :class="{active: currentTag==tag}") {{tag}}
       
-      .row.row-work.mt-3.mb-4
-        router-link.col-xs-12.col-sm-12.col-md-12.col-lg-6.col-work.animated.fadeIn.mb-4.mt-2(
+      .row.row-work.mb-4
+        router-link.col-xs-12.col-sm-12.col-md-12.col-lg-6.col-work.animated.fadeIn.mb-3.mt-2(
             v-for="(work,wid) in sortedWorks", 
             :to="`/project/${getProjectName(work.title)}`", 
             :key="work.uid",
