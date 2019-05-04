@@ -12,7 +12,7 @@ import SoftScroll from './plugins/soft_scroll.js'
 // import p5 from 'p5'
 import VueAnalytics from 'vue-analytics'
 
-if (document.domain == "wucheyu.monoame.com") {
+if (document.domain == "cheyuwu.com") {
   Vue.use(VueAnalytics, {
     id: 'UA-52977512-26',
     router
