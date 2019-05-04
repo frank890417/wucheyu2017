@@ -13,7 +13,7 @@
               router-link(to="/" :class="{active: $route.path=='/'}") Works
               router-link(to="/about" :class="{active: $route.path=='/about'}") About
               router-link(to="/experiment" :class="{active: $route.path=='/experiment'}") Experiments
-              router-link(to="/research" :class="{active: $route.path=='/research'}") Research
+              //- router-link(to="/research" :class="{active: $route.path=='/research'}") Research
               a(href="/static/Che-Yu Wu Resume.pdf" target="blank" :class="{active: $route.path=='/resume'}") Resume
     transition(name="page" , mode="out-in")
       pageLoading(v-if="loading")
