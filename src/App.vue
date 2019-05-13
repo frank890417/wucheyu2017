@@ -9,7 +9,7 @@
             //- router-link(to="/about" :class="{active: $route.path=='/about'}") About
             router-link(to="/")
               h2 CHE-YU WU
-            div
+            div.subroute
               router-link(to="/" :class="{active: $route.path=='/'}") Works
               router-link(to="/about" :class="{active: $route.path=='/about'}") About
               router-link(to="/experiment" :class="{active: $route.path=='/experiment'}") Experiments
@@ -80,16 +80,31 @@ nav
     font-weight: 900
   a
     color: black
-    margin-left: 20px
-    margin-right: 20px
     transition: 0.5s
-
     &:hover,&.active
-      border-bottom: solid 2px
-      text-decoration: none
       color: black
-    &.active
-      color: #ff8c11
+      border-bottom: solid 3px
+      text-decoration: none
+      padding-bottom: 0px
+  .subroute
+    a
+      color: black
+      margin-left: 10px
+      margin-right: 10px
+      padding-left: 10px
+      padding-right: 10px
+      transition: 0.5s
+      
+      &:hover,&.active
+        // border-bottom: solid 2px
+        // text-decoration: none
+        // color: black
+        background-color: black
+        color: white
+      // padding-left: 15px
+      // padding-right: 15px
+    
+      // color: #ff8c11
   
   // margin-top: 60px
 

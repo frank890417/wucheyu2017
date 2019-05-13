@@ -46,6 +46,12 @@ export default {
           cover: "https://openprocessing-usercontent.s3.amazonaws.com/thumbnails/visualThumbnail598254@2x.jpg"
         },
         {
+          title: "Network Attack",
+          date: "2019/5/8",
+          src: "https://www.openprocessing.org/sketch/708757",
+          cover: "https://openprocessing-usercontent.s3.amazonaws.com/thumbnails/visualThumbnail708757@2x.jpg"
+        },
+        {
           title: "Universe",
           date: "2019/2/27",
           src: "https://www.openprocessing.org/sketch/676343",
@@ -62,12 +68,6 @@ export default {
           date: "2018/10/28",
           src: "https://www.openprocessing.org/sketch/616561",
           cover: "https://openprocessing-usercontent.s3.amazonaws.com/thumbnails/visualThumbnail616561@2x.jpg"
-        },
-        {
-          title: "Please detect Me",
-          date: "2019/2/10",
-          src: "https://www.openprocessing.org/sketch/667447",
-          cover: "https://openprocessing-usercontent.s3.amazonaws.com/thumbnails/visualThumbnail667447@2x.jpg"
         },
         {
           title: "Project 12 Space Invader",
@@ -87,6 +87,12 @@ export default {
           date: "2018/12/7",
           src: "https://www.openprocessing.org/sketch/641437",
           cover: "https://openprocessing-usercontent.s3.amazonaws.com/thumbnails/visualThumbnail641437@2x.jpg"
+        },
+        {
+          title: "Please detect Me",
+          date: "2019/2/10",
+          src: "https://www.openprocessing.org/sketch/667447",
+          cover: "https://openprocessing-usercontent.s3.amazonaws.com/thumbnails/visualThumbnail667447@2x.jpg"
         }
 
 
@@ -144,13 +150,13 @@ export default {
     transition: 0.5s
     font-weight: 800
     
-    // filter: brightness(0.5)
     &:hover
       background-size: 120%
       filter: brightness(1)
       color: white
     span
       padding: 0px 5px
-      transition: 0.5s
+      font-weight: 500
+      // transition: 0.5s
 
 </style>

@@ -13,7 +13,7 @@
     a(href="http://issuu.com/wucheyu/docs/2017_portfolio" target="_blank" title="Portfolio on ISSUU") 
       i.fas.fa-book
       
-    a(href="https://hahow.in/@majer" target="_blank" title="Portfolio on ISSUU") 
+    //a(href="https://hahow.in/@majer" target="_blank" title="Hahow Online Course") 
       img(src="/static/img/hahowicon.png" style="width: 23px; margin-top: -5px")
               
 </template>
