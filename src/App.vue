@@ -4,12 +4,13 @@
       .row
         .col-sm-12
           
-          nav(v-if="!$route.path.includes('manage') && !$route.path.includes('/project/')")
+          nav(v-if="!$route.path.includes('manage') && !$route.path.includes('/project/')",
+              :class="{white: $route.path=='/about'}")
             //- router-link(to="/" :class="{active: $route.path=='/'}") Index
             //- router-link(to="/about" :class="{active: $route.path=='/about'}") About
             router-link(to="/")
               h2 CHE-YU WU
-            div.subroute
+            div.subroute(:class="{white: $route.path=='/about'}")
               router-link(to="/" :class="{active: $route.path=='/'}") Works
               router-link(to="/about" :class="{active: $route.path=='/about'}") About
               router-link(to="/experiment" :class="{active: $route.path=='/experiment'}") Experiments
@@ -19,10 +20,10 @@
       pageLoading(v-if="loading")
     transition(name="page" , mode="out-in")
       router-view(:key="$route.path")
-    .row.copyright
+    .row.copyright.mt-5
       .col-sm-12.mt-2.pt-1.pb-5
         label Copyright© Che-Yu Wu, 2019
-        .text-center.mt-3
+        .text-center.mt-2
           social-links
 </template>
 
@@ -44,22 +45,24 @@ export default {
 </script>
 
 <style lang="sass">
-
+@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i&display=swap');
 canvas
   position: absolute
   z-index: -1
   left: 0
   top: 0
+
 body
-  font-family: 'Avenir', Helvetica, Arial, sans-serif !important
+  font-family: 'IBM Plex Sans', sans-serif
   -webkit-font-smoothing: antialiased
   -moz-osx-font-smoothing: grayscale
   text-align: center
-  // color: #2c3e50
+  // color: #fff
   background-color: #fff
+  color: #111
+  overflow-x: hidden
   overflow-y: scroll
 
-  overflow-x: hidden
 .page
   min-height: 100vh
   // height: auto
@@ -71,24 +74,31 @@ h1,h2,h3,h4,h5,h6
   font-weight: bold
 
 nav
-  margin: 30px
+  margin: 15px
   font-weight: bold
   display: flex
   justify-content: space-between
+  transition: 0.5s
+  h2,a
+    transition: 0.5s
   h2
     font-size: 1.5rem
     font-weight: 900
+    color: black
   a
     color: black
     transition: 0.5s
     &:hover,&.active
-      color: black
-      border-bottom: solid 3px
+      // border-bottom: solid 3px
       text-decoration: none
       padding-bottom: 0px
+  &.white
+    a,h2 
+      color: white
   .subroute
+    &.white
+      color: white
     a
-      color: black
       margin-left: 10px
       margin-right: 10px
       padding-left: 10px

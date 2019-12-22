@@ -1,8 +1,8 @@
 <template lang="pug">
   .page.page-works
-    .container
+    .container-fluid
 
-      .row 
+      //.row 
         .col-sm-12
           .catas
             .cata(@click="currentTag=''", :class="{active: !currentTag}") All
@@ -10,8 +10,8 @@
                   @click="currentTag = tag",
                  :class="{active: currentTag==tag}") {{tag}}
       
-      .row.row-work.mb-4
-        router-link.col-xs-12.col-sm-12.col-md-12.col-lg-6.col-work.animated.fadeIn.mb-3.mt-2(
+      .row.row-work.mb-3.text-left
+        router-link.col-xs-12.col-sm-12.col-md-6.col-lg-6.col-xl-4.col-work.animated.fadeIn.p-0(
             v-for="(work,wid) in sortedWorks", 
             :to="`/project/${getProjectName(work.title)}`", 
             :key="work.uid",
@@ -21,12 +21,12 @@
             
           .work(
             :style="cssbg(work.cover)")
+            .fixed
+              h3.mt-4 {{work.title}}
+              h6.mt-3 {{work.client}}
+          
           //.tags
             .tag(v-for="tag in work.cata") {{tag}}
-              
-          h3.mt-4 {{work.title}}
-          h6 {{work.client}}
-          
 
 </template>
 
@@ -83,9 +83,8 @@ export default {
 .page-works
 
   .container
-    max-width: 1350px
-  a
-    color: #333
+    max-width: 1400px
+
   h1, h2 
     font-weight: normal
 
@@ -98,38 +97,42 @@ export default {
   h4
     font-size: 20px
     margin-top: 20px
+
   h3
-    font-size: 1.5rem
-    color: #333
+    font-size: 2.8rem
     font-weight: 600
-    line-height: 1.3
+    line-height: 1.2
 
   h5
     // color: white
-    font-size: 22px
+    font-size: 20px
     opacity: 0.8
     border-left: solid 5px white
     // padding-left: 20px
-    line-height: 1.5
+    line-height: 1.4
     font-weight: 600
     width: 100%
-    color: #333
+
+
     // &:first-letter
       // font-size: 30px
       // margin-right: 2px
+
+  p
+    color: white
+
   hr
-    border-bottom: solid 4px #333
+    border-bottom: solid 3px #333
     width: 50px
     display: block
 
 
   h6
-    // color: white
-    opacity: 0.4
+    opacity: 0.6
     // letter-spacing: 1px
-    margin-top: 10px
+    margin-top: 3px
     font-weight: 500
-    line-height: 1.5
+    line-height: 1.2
 
   .catas
     .cata
@@ -165,12 +168,6 @@ export default {
       top: 0
       border: none
 
-   
-  .row-work
-    // padding: 50px 40px
-    text-align: left
-    padding-top: 40px
-
   .page-index
     // background-color: black
     // color: white
@@ -184,16 +181,20 @@ export default {
     margin-top: 20px
   .col-work
     padding: 10px 40px
-
+    filter: saturate(100%)
     color: black
 
     &:hover
       text-decoration: none
+      filter: saturate(100%)
     .work
+
       background-color: #eee
-      height: 380px
+      height: 420px
       display: block
-      border-radius: 4px
+      color: white
+      text-align: left
+      // border-radius: 4px
       // background-image: url(http://www.monoame.com/projects/proj_selinko/main.jpg)
       background-size: cover
       background-position: center center
@@ -202,24 +203,50 @@ export default {
       justify-content: center
       align-items: center
       position: relative
-      box-shadow: 0px 10px 20px -10px rgba(black,0.3)
+      box-shadow: 0px 10px 20px -10px rgba(black,0.25)
+      // border: solid 5px #333
       transition-duration: 0.5s
-      &:hover
-        transform: translateY(-5px)
-        box-shadow: 0px 20px 20px -5px rgba(black,0.2)
-      
-      &:before
-        content: 'Explore'
-        opacity: 0
-        background-color: black
+      .fixed
+        text-align: left
+        pointer-events: none
         position: absolute
+        left: 0
+        top: 0
         width: 100%
         height: 100%
         transition: 0.5s
+        padding: 30px
+        color: transparent
+        // h3
+          // -webkit-text-stroke: 1px white
+        h3
+          transition: 0.5s
+        h6
+          color: transparent
+          transition: 0.5s
+      &:hover
+        // transform: translateY(-5px)
+        box-shadow: 0px 30px 20px -20px rgba(black,0.2)
+        background-size: cover
         color: white
-        display: flex
-        justify-content: center
-        align-items: center
+        .fixed
+          background-color: rgba(black,0.85)
+          h3
+            color: white
+          h6
+            color: white
+      // &:before
+      //   content: 'Explore'
+      //   opacity: 0
+      //   background-color: black
+      //   position: absolute
+      //   width: 100%
+      //   height: 100%
+      //   transition: 0.5s
+      //   color: white
+      //   display: flex
+      //   justify-content: center
+        // align-items: center
 
         
       &:hover

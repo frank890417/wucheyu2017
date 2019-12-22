@@ -107,6 +107,7 @@ export default {
 
 .page-project
   // padding-bottom: 20vh
+  // color: white
     
   .content-area
     padding-top: 50px
@@ -138,7 +139,7 @@ export default {
     min-height: 60vh
     background-color: #eee
     background-position: center center
-    background-attachment: fixed
+    // background-attachment: fixed
     // margin-top: 30px
     margin-bottom: 50px
     background-size: cover

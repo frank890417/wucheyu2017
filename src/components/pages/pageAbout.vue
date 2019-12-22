@@ -13,8 +13,11 @@
           p Devoted to Creative Coding, immersive user experience design,<br> full-stack development, sound synthesis, and tutoring.
           ul.mt-4
             li 
-              b 2019 
+              b 2018-2019 
               span  | NYU IDM Graduate Research Assistant @ New York University
+            li 
+              b 2019 
+              span  | VR / AR Development Intern @ New Reality Co.
             li 
               b 2018
               span  | System Engineer @Research Center for Technology and art, Tsing Hua College
@@ -46,23 +49,24 @@ function bg(sketch){
     sketch.resizeCanvas(sketch.windowWidth,sketch.windowHeight)
   }
   sketch.draw = function(){
-    sketch.background(255)
+    sketch.background(0)
 
+    sketch.stroke(255)
     
     for(var i=0;i<sketch.width;i+=10){
       if (i% 50==0){
-        sketch.stroke(0,0,10,0.2)
+        sketch.stroke(255,255,255,0.2)
       }else{
-        sketch.stroke(0,0,10,0.05)
+        sketch.stroke(255,255,255,0.05)
       }
       sketch.line(i,0,i,sketch.height)
       
     }
     for(var i=0;i<sketch.height;i+=10){
       if (i% 50==0){
-        sketch.stroke(0,0,10,0.2)
+        sketch.stroke(255,255,255,0.2)
       }else{
-        sketch.stroke(0,0,10,0.05)
+        sketch.stroke(255,255,255,0.05)
       }
       sketch.line(0,i,sketch.width,i)
     }
@@ -121,6 +125,8 @@ export default {
 .page-about
   line-height: 2rem
   min-height: 100vh
+  // background-color: black
+  color: white
   // position: relative
   .container.content
     position: static
@@ -167,8 +173,8 @@ export default {
     padding: 10px
   h1
     font-size: 4rem
-    font-weight: 900
-  h1,h3
+    font-weight: 500
+  h3
     font-weight: bold
   pre
     background-color: black

@@ -18,6 +18,7 @@
                 .col-11
                   span {{wid+1}}. 
                   span {{w.title}}
+                  input(v-model="w.order")
                 .col-1
                   span(@click="removeItem(wid)")
                     i.fas.fa-trash
@@ -48,6 +49,8 @@
                     el-input(v-model="work.order")
                   el-form-item(label="連結")
                     el-input(v-model="work.link")
+                  el-form-item(label="順序")
+                    el-input(v-model="work.order")
                   el-form-item(label="顯示")
                     el-switch(v-model="work.show")
                   //el-form-item(label="顏色")
@@ -264,7 +267,8 @@ export default {
   .page-edit
     padding-top: 50px
   .cover
-    height: 400px
+    height: 60vh
+    min-height: 400px
     background-color: #eee
     margin-top: 30px
     margin-bottom: 50px
