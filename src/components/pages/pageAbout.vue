@@ -177,8 +177,8 @@ export default {
   h3
     font-weight: bold
   pre
-    background-color: black
-    color: white
+    background-color: white
+    color: black
     display: inline-block
     padding: 0px 10px
   

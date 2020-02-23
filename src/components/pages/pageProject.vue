@@ -13,7 +13,8 @@
             h1 {{work.title}}
             
         .row
-          .col-sm-12.col-content
+          .col-sm-6.col-content
+            
             ul.text-left
               li 
                 label Client
@@ -30,6 +31,13 @@
               li(v-if="work.link")
                 label Link
                 a(:href="work.link", target="_blank") {{work.link}}
+          .col-sm-6.col-content
+            ul.text-left
+              li 
+                label Honors
+                p(v-html="processHTML(work.honor)")
+        .row
+          .col-sm-12.col-content
             p.text-left(v-html="processHTML(work.content)")
           //- h3 Project Information
       .row.row-nav
@@ -59,7 +67,7 @@ export default {
     ...mapState(['works']),
     work(){  
       if (isNaN(this.$route.params.id)){
-        let toComp = (title)=>title.replace(/[\ ]/g,'_').replace(/\//g,'_').replace(/\&/g,'_')
+        let toComp = (title)=> (title || "").replace(/[\ ]/g,'_').replace(/\//g,'_').replace(/\&/g,'_').toLowerCase()
         return Object.values(this.works).find(w=>toComp(w.title)==toComp(this.$route.params.id))
       }else{
         return this.works[this.$route.params.id]
@@ -83,7 +91,7 @@ export default {
   },
   methods: {
     processHTML(text){
-      return text.replace(/\n/g,'<br>')
+      return (text || "").replace(/\n/g,'<br>')
     },
     cssbg(url) {
       let use_url = (url && url != '') ? url : '/img/default.jpg'

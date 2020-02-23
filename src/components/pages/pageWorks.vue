@@ -15,12 +15,12 @@
             v-for="(work,wid) in sortedWorks", 
             :to="`/project/${getProjectName(work.title)}`", 
             :key="work.uid",
-            v-if="!currentTag || work.cata.indexOf(currentTag)!=-1"
-            
+            v-if="!currentTag || work.cata.indexOf(currentTag)!=-1",
           )
             
           .work(
             :style="cssbg(work.cover)")
+            video(v-if="work.video" :src="work.video" muted autoplay loop)
             .fixed
               h3.mt-4 {{work.title}}
               h6.mt-3 {{work.client}}
@@ -190,7 +190,7 @@ export default {
     .work
 
       background-color: #eee
-      height: 420px
+      height: 440px
       display: block
       color: white
       text-align: left
@@ -206,6 +206,14 @@ export default {
       box-shadow: 0px 10px 20px -10px rgba(black,0.25)
       // border: solid 5px #333
       transition-duration: 0.5s
+      overflow: hidden
+      border-botton: solid 10px black
+      video
+        position: absolute
+        left: 50%
+        top: 50%
+        height: 100%
+        transform: translate(-50%,-50%)
       .fixed
         text-align: left
         pointer-events: none
@@ -230,7 +238,7 @@ export default {
         background-size: cover
         color: white
         .fixed
-          background-color: rgba(black,0.85)
+          background-color: rgba(black,0.88)
           h3
             color: white
           h6

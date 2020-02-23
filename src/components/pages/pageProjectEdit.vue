@@ -5,28 +5,32 @@
       .row
 
         .col-sm-3.col-list
-          div
 
           //ul.breadcrumb
             li.breadcrumb-item
               router-link(to="/", target="_blank") 管理
             li.breadcrumb-item 編輯專案
-          el-button.pt-4.pb-4(@click="addItem" type="primary" style="width: 100%") + Add Item 
+          div.text-left.pl-3
+            label.mr-2 顯示/隱藏 
+            el-switch(v-model="showHiddenWorks")
           ul.list-group.text-left
-            li.list-group-item(v-for="(w,wid) in sortedWorks", @click="nowId=w.uid", :class="{active:nowId==w.uid, show: w.show}")
+            li.list-group-item(v-for="(w,wid) in sortedWorks", 
+                               @click="nowId=w.uid", :class="{active:nowId==w.uid, show: w.show}",
+                               v-if="w.show || showHiddenWorks ")
               .row
                 .col-11
                   span {{wid+1}}. 
                   span {{w.title}}
-                  input(v-model="w.order")
+                  //input(v-model="w.order")
                 .col-1
                   span(@click="removeItem(wid)")
                     i.fas.fa-trash
+          el-button.pt-4.pb-4(@click="addItem" type="primary" style="width: 100%") + Add Item 
                 //.col-2
                   el-input.input-order-number(type="number" v-model="w.order")
         .col-sm-3
           
-        .col-sm-9(v-if="work", :key="nowId")
+        .col-sm-9(v-if="work ", :key="nowId")
           .container-fluid.text-left
             .row
               .col-sm-12
@@ -36,7 +40,7 @@
                     .col-9
                       el-input.input-title(v-model="work.title")
                     .col-3
-                      router-link.btn.btn-secondary.float-right(:to="'/project/'+nowId", target="_blank") Open Project
+                      router-link.btn.btn-secondary.float-right(:to="'/project/'+toComp(work.title)", target="_blank") Open Project
                       button.btn.btn-primary.float-right.mr-2(@click="saveAll") Save
                 hr
                 
@@ -49,6 +53,8 @@
                     el-input(v-model="work.order")
                   el-form-item(label="連結")
                     el-input(v-model="work.link")
+                  el-form-item(label="影片")
+                    el-input(v-model="work.video")
                   el-form-item(label="順序")
                     el-input(v-model="work.order")
                   el-form-item(label="顯示")
@@ -88,6 +94,9 @@
                           i(class="el-icon-plus avatar-uploader-icon")
                   el-form-item(label="日期")
                     el-input(v-model="work.date")
+                  el-form-item(label="榮譽")
+                    el-input(v-model="work.honor", type="textarea")
+
               .col-sm-9
                 el-form
                   el-form-item(label="")
@@ -110,7 +119,7 @@ export default {
   data () {
     return {
       nowId: 0,
-      
+      showHiddenWorks: false
     }
   },
   computed:{
@@ -138,6 +147,10 @@ export default {
     })
   },
   methods: {
+
+    toComp(title){
+      return  (title || "").replace(/[\ ]/g,'_').replace(/\//g,'_').replace(/\&/g,'_').toLowerCase()
+    },
     save(){
       var workRef = window.firebase.database().ref('works/' + this.nowId);
       // console.log(this.work)
@@ -310,9 +323,9 @@ export default {
     z-index: 10
     padding: 0
     display: flex
-    flex-direction: column-reverse
-    justify-content: space-between
-    padding-top: 5vh
+    flex-direction: column
+    // justify-content: space-between
+    padding-top: 3vh
     .el-button
       margin: 0
     .list-group

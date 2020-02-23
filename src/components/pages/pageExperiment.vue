@@ -88,12 +88,18 @@ export default {
           src: "https://www.openprocessing.org/sketch/641437",
           cover: "https://openprocessing-usercontent.s3.amazonaws.com/thumbnails/visualThumbnail641437@2x.jpg"
         },
-        {
-          title: "Please detect Me",
-          date: "2019/2/10",
-          src: "https://www.openprocessing.org/sketch/667447",
-          cover: "https://openprocessing-usercontent.s3.amazonaws.com/thumbnails/visualThumbnail667447@2x.jpg"
-        }
+        { 
+          title: "Drunk",
+          date: "2019/10/28",
+          src: "https://www.openprocessing.org/sketch/779854",
+          cover: "https://openprocessing-usercontent.s3.amazonaws.com/thumbnails/visualThumbnail779854@2x.jpg"
+        },
+        // {
+        //   title: "Please detect Me",
+        //   date: "2019/2/10",
+        //   src: "https://www.openprocessing.org/sketch/667447",
+        //   cover: "https://openprocessing-usercontent.s3.amazonaws.com/thumbnails/visualThumbnail667447@2x.jpg"
+        // }
 
 
       ]
@@ -114,7 +120,7 @@ export default {
 <style lang="sass">
 .page-experiment
   .container
-    max-width: 1550px
+    max-width: 1600px
   iframe
     width: 100%
     height: 600px
