@@ -7,6 +7,7 @@ import pageExperiment from '@/components/pages/pageExperiment'
 import pageResearch from '@/components/pages/pageResearch'
 import pageProject from '@/components/pages/pageProject'
 import pageProjectEdit from '@/components/pages/pageProjectEdit'
+import pageArts from '@/components/pages/pageArts'
 
 Vue.use(Router)
 
@@ -35,6 +36,10 @@ export default new Router({
       path: '/work',
       name: 'work',
       component: pageWorks
+    }, {
+      path: '/arts',
+      name: 'arts',
+      component: pageArts
     }, {
       path: '/manage',
       name: 'project_edit',
