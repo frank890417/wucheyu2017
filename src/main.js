@@ -5,6 +5,7 @@ import App from './App'
 import router from './router'
 import store from './store'
 import ElementUI from 'element-ui'
+import $ from 'jquery'
 import 'element-ui/lib/theme-chalk/index.css'
 import '@/assets/fontawesome-pro-5.8.1-web/css/all.min.css'
 import '@/assets/fontawesome-pro-5.8.1-web/js/all.min.js'
@@ -40,6 +41,12 @@ var vm = new Vue({
 setTimeout(() => {
   store.commit("setLoading",false)
 }, 100);
+
+$.getJSON("/static/sketchs.json",(data)=>{
+  store.commit("setUserData",data)
+  // this.$set(this,"userData",data)
+  // console.log(data)
+})
 
 Vue.mixin({
   methods: {

@@ -13,15 +13,17 @@
 </template>
 
 <script>
-import $ from 'jquery'
 import axios from 'axios'
+import {mapState} from 'vuex'
+
 export default {
   data(){
     return {
-      userData: {}
+      // userData: {}
     }
   },
   computed:{
+    ...mapState(['userData']),
     sketches(){
       if (this.userData.user){
         let results= this.userData.user.visuals.filter(p=>p.pinnedOn)
@@ -31,11 +33,8 @@ export default {
       return []
     }
   },
-  mounted(){
-    $.getJSON("/static/sketchs.json",(data)=>{
-      this.$set(this,"userData",data)
-      console.log(data)
-    })
+  created(){
+    
   }
 }
 </script>

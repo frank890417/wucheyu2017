@@ -7,6 +7,7 @@ export default new Vuex.Store({
   state: {
     works: [],
     loading: true,
+    userData: {},
     defaut_hashtags: [
       "Visual",
       // "UI/UX",
@@ -20,6 +21,9 @@ export default new Vuex.Store({
     ]
   },
   mutations: {
+    setUserData(state,value){
+      state.userData=value
+    },
     setWorks(state, value){
       state.works = value
       
