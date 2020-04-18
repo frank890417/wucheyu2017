@@ -11,4 +11,4 @@ os.system("git add sketchs.json")
 os.system("git commit -m '" + now.strftime("%m/%d/%Y") +" Update sketchs Data'")
 os.system("git push")
 
-os.system("sh ../deploy.sh")
+# os.system("sh ../deploy.sh")
