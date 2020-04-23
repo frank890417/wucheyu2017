@@ -46,7 +46,18 @@ $.getJSON("/static/sketchs.json",(data)=>{
   store.commit("setUserData",data)
   // this.$set(this,"userData",data)
   // console.log(data)
+  try{
+    $.getJSON("/static/sketchs.php",(data)=>{
+      store.commit("setUserData",data)
+      // this.$set(this,"userData",data)
+      // console.log(data)
+    })
+  }catch{
+
+  }
+  
 })
+
 
 Vue.mixin({
   methods: {
