@@ -1,2 +1,0 @@
-webpackJsonp([0],{NHnr:function(m,n){throw new Error("Module build failed: SyntaxError: Unexpected token, expected ( (55:8)\n\n[0m [90m 53 | [39m      [90m// console.log(data)[39m\n [90m 54 | [39m    })\n[31m[1m>[22m[39m[90m 55 | [39m  }[36mcatch[39m{\n [90m    | [39m        [31m[1m^[22m[39m\n [90m 56 | [39m\n [90m 57 | [39m  }\n [90m 58 | [39m  [0m\n")}},["NHnr"]);
-//# sourceMappingURL=app.cac0d440c004a2690a98.js.map

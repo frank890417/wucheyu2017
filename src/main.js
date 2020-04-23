@@ -42,21 +42,21 @@ setTimeout(() => {
   store.commit("setLoading",false)
 }, 100);
 //https://www.openprocessing.org/api/user/139364/sketchs.json
-$.getJSON("/static/sketchs.json",(data)=>{
-  store.commit("setUserData",data)
+
   // this.$set(this,"userData",data)
   // console.log(data)
-  try{
-    $.getJSON("/static/sketchs.php",(data)=>{
-      store.commit("setUserData",data)
-      // this.$set(this,"userData",data)
-      // console.log(data)
-    })
-  }catch{
-
-  }
+try{
+  $.getJSON("/static/sketchs.php",(data)=>{
+    store.commit("setUserData",data)
+    // this.$set(this,"userData",data)
+    // console.log(data)
+  })
+}catch (err){
+  $.getJSON("/static/sketchs.json",(data)=>{
+    store.commit("setUserData",data)
+  })
+}
   
-})
 
 
 Vue.mixin({
