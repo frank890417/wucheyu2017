@@ -10,6 +10,7 @@
     "start": "npm run dev"
   },
   "dependencies": {
+    "codemirror": "^5.53.2",
     "compress.js": "^1.1.2",
     "element-ui": "^2.0.11",
     "gsap": "^2.0.2",
@@ -20,6 +21,7 @@
     "vue": "^2.5.2",
     "vue-analytics": "^5.16.1",
     "vue-axios": "^2.0.2",
+    "vue-codemirror": "^4.0.6",
     "vue-meta": "^1.4.2",
     "vue-router": "^3.0.1",
     "vue2-editor": "^2.3.11",

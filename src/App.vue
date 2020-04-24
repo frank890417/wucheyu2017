@@ -15,15 +15,16 @@
               router-link(to="/about" :class="{active: $route.path=='/about'}") About
               router-link(to="/experiment" :class="{active: $route.path=='/experiment'}") Experiments
               router-link(to="/arts" :class="{active: $route.path=='/arts'}") Arts
+              router-link(to="/thesis" :class="{active: $route.path=='/thesis'}") Thesis
               //- router-link(to="/research" :class="{active: $route.path=='/research'}") Research
               a(href="/static/Che-Yu Wu Resume.pdf" target="blank" :class="{active: $route.path=='/resume'}") Resume
     transition(name="page" , mode="out-in")
       pageLoading(v-if="loading")
     transition(name="page" , mode="out-in")
       router-view(:key="$route.path")
-    .row.copyright.mt-5
+    .row.copyright.mt-5(v-if="$route.path!='/thesis'")
       .col-sm-12.mt-2.pt-1.pb-5
-        label Copyright© Che-Yu Wu, 2019
+        label Copyright© Che-Yu Wu, 2020
         .text-center.mt-2
           social-links
 </template>

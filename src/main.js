@@ -13,6 +13,14 @@ import SoftScroll from './plugins/soft_scroll.js'
 // import p5 from 'p5'
 import VueAnalytics from 'vue-analytics'
 
+import VueCodemirror from 'vue-codemirror'
+import 'codemirror/mode/javascript/javascript.js'
+import 'codemirror/lib/codemirror.css'
+// import 'font-awesome/css/all.css'
+
+import CodeArea from './components/CodeArea'
+Vue.component("CodeArea",CodeArea)
+
 if (document.domain == "cheyuwu.com") {
   Vue.use(VueAnalytics, {
     id: 'UA-52977512-26',
