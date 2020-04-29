@@ -93,7 +93,7 @@ function draw() {
   noStroke()
   textAlign(LEFT, BOTTOM)
   text(toolTips+ 
-          "\nDouble Click - Trigger\nWheel / Alt+Wheel - Change value\nAlt + Click - remove Link", 20, height - 20)
+          "\nDouble Click - Trigger\nWheel / Alt+Wheel - Change value\nAlt + Click - remove Link\nEsc - Clear All", 20, height - 20)
   textAlign(LEFT, TOP)
   text(mouseX+","+mouseY,width-80,30)
   textSize(20)
@@ -198,6 +198,10 @@ function keyPressed() {
     modules.forEach(m => m.nextNodes = m.nextNodes.filter(n => n != selectedModule))
     modules = modules.filter(m => m !== selectedModule)
     selectedModule = null
+  }
+  if (key == "Escape") {
+    modules= modules.filter(m=>m.type=='Melody')
+    modules.forEach(m=>m.nextNodes=[])
   }
 
 }

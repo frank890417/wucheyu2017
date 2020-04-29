@@ -18,9 +18,7 @@
           
         .col-sm-9
           p5-vue-mirror( :scriptFiles="scriptFiles",
-                   @scroll.stop="()=>{}",
-
-                    )
+                   @scroll.stop="()=>{}" , :hidecode="true")
                     //:hidecode="true"
   
 </template>
