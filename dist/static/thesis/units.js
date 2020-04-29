@@ -24,18 +24,39 @@ class Melody extends Module {
     return null
   }
 
+  updateNote(note,delta = 1) {
+    this.notes[this.index % this.notes.length] = note
+    // this.index--
+  }
+
   input(args) {
-    let note = this.playNextNote((args && args.delta) || 1)
-    // if (note) {
+    console.log(args)
+    let note
+    if (args.note){
+      this.updateNote(args.note)
+      note = this.playNextNote(0)
+      this.index++
+    }else{
+      note = this.playNextNote(1)
+    }
     this.outputToNextNodes({
       note
     })
+    // if (note) {
     // } else {
 
     // this.outputToNextNodes({
     //   note: ""
     // })
     // }
+  }
+
+  mouseWheel(delta) {
+    if (this.isMouseInModule()) {
+      this.notes.length += delta > 0 ? 1 : -1
+      
+      this.size.x = this.notes.length * this.noteSpanSize + 10
+    }
   }
   updateModule() {
     // if ( frameCount % 20 && this.started){
@@ -112,6 +133,7 @@ class Melody extends Module {
   }
 
 }
+
 class Transporter extends Module {
   constructor(args) {
     super(args)
