@@ -13,14 +13,14 @@ class Module {
   drawReact() {
     push()
     translate(this.p.x, this.p.y)
-    stroke(255, 100)
+    stroke(255, 70)
     if (linkSource && this.isMouseInModule()) {
       stroke(50, 50, 255, 400)
-      strokeWeight(5)
+      strokeWeight(4)
     }
     if (selectedModule===this) {
       stroke(50, 50, 255, 400)
-      strokeWeight(5)
+      strokeWeight(4)
     }
     // fill(255)
     noFill()
@@ -59,7 +59,7 @@ class Module {
       // this.p=createVector(Math.round(this.p.x/span)*span,Math.round(this.p.y/span)*span)
     }
     this.updateModule && this.updateModule()
-    if (this.nextNodes.length){
+    if (this.nextNodes.length && this.isPressing){
 
       this.nextNodes[0].p.x = this.p.x
     }
