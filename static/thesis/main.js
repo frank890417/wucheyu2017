@@ -39,6 +39,10 @@ function setup() {
     p: createVector(500,300)
   })
   modules.push(kb)
+  let sft = new SoundSofter({
+    p: createVector(800,300)
+  })
+  modules.push(sft)
 
   if (navigator.requestMIDIAccess) {
       console.log('This browser supports WebMIDI!');
@@ -75,7 +79,6 @@ function draw() {
       cursor('pointer')
     }
     module.update()
-
     module.draw()
   })
   if (linkSource) {
@@ -98,6 +101,7 @@ function draw() {
   pop()
 
   let toolBoxP = createVector(width-100,100)
+
   push()
     translate(toolBoxP)
     for(var i=0;i<toolBox.length;i++){

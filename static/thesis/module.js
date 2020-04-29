@@ -12,37 +12,39 @@ class Module {
   }
   drawReact() {
     push()
-    translate(this.p.x, this.p.y)
-    stroke(255, 70)
-    if (linkSource && this.isMouseInModule()) {
-      stroke(50, 50, 255, 400)
-      strokeWeight(4)
-    }
-    if (selectedModule===this) {
-      stroke(50, 50, 255, 400)
-      strokeWeight(4)
-    }
-    // fill(255)
-    noFill()
-    if (this.isPressing) {
-      stroke('red')
-    }
-    rect(0, 0, this.size.x, this.size.y)
+      translate(this.p.x, this.p.y)
+      stroke(255, 70)
+      if (linkSource && this.isMouseInModule()) {
+        stroke(50, 50, 255, 400)
+        strokeWeight(4)
+      }
+      if (selectedModule===this) {
+        stroke(50, 50, 255, 400)
+        strokeWeight(4)
+      }
+      // fill(255)
+      noFill()
+      if (this.isPressing) {
+        stroke('red')
+      }
+      rect(0, 0, this.size.x, this.size.y)
     pop()
   }
   draw() {
     push()
-    fill(255)
-    textAlign(LEFT, BOTTOM)
-    noStroke()
-    text(this.type, this.p.x, this.p.y-3)
+      fill(255)
+      textAlign(LEFT, BOTTOM)
+      noStroke()
+      text(this.type, this.p.x, this.p.y-3)
     pop()
     push()
-    fill(255)
-    ellipse(this.p.x, this.p.y, 5, 5)
-    ellipse(this.p.x, this.p.y + this.size.y, 5, 5)
+      fill(255)
+      ellipse(this.p.x, this.p.y, 5, 5)
+      ellipse(this.p.x, this.p.y + this.size.y, 5, 5)
     pop()
-    this.drawReact()
+    push()
+      this.drawReact()
+    pop()
     this.nextNodes.forEach(node => {
       push()
         stroke(255)

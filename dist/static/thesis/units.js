@@ -4,7 +4,7 @@ class Melody extends Module {
     super(args)
     this.type = this.constructor.name
     // this.synth = args,synth
-    this.noteSpanSize = 18
+    this.noteSpanSize = 17
     this.size.x = this.notes.length * this.noteSpanSize + 10
     this.size.y = 40
     this.index = -1
@@ -61,6 +61,7 @@ class Melody extends Module {
     fill(255)
     textAlign(CENTER, TOP)
     textSize(10)
+    noStroke()
     this.notes.forEach((note, i) => {
       // rect(i*20,0,20,20)
       textAlign(LEFT, TOP)
@@ -78,7 +79,17 @@ class Melody extends Module {
       pop()
       circle(i * this.noteSpanSize + 10, map(Math.log(freq), 5, 7, this.size.y, 0), useR)
 
-      text(note, i * this.noteSpanSize + 5, 5)
+      push()
+        if (note){
+          text(note[0], i * this.noteSpanSize + 5, 5)
+          textSize(8)
+          fill(255,150)
+          text(note[1], i * this.noteSpanSize + 12, 5)
+
+        }
+
+      pop()
+
     })
     pop()
 
@@ -325,6 +336,17 @@ class Synth extends Module {
       synth: new Tone.PolySynth({
         polyphony: 4,
         volume : -5
+      },Tone.Synth,
+      {
+        oscillator : {
+        type : triangle
+        } ,
+        envelope : {
+        attack : 0.005 ,
+        decay : 0.1 ,
+        sustain : 0.3 ,
+        release : 1
+        }
       }).toMaster(),
       lastTriggerTime: 0,
       isTriggering: false,
@@ -636,10 +658,11 @@ class SoundSofter extends Module {
   }
   updateModule() {}
   drawModule() {
+
     push()
     translate(this.p.x, this.p.y + 10)
     textSize(40)
-    text("🐢", this.size.x / 2, this.size.y / 2 + map(frameCount - this.lastTriggerTime, 0, this.duration / 10, -15, 0, true))
+    text("☁️", this.size.x / 2, this.size.y / 2)
     fill(255);
     textSize(12)
     text(this.duration, this.size.x / 2, this.size.y / 2 + 10)
@@ -647,7 +670,10 @@ class SoundSofter extends Module {
 
   }
   trigger() {
-    this.isTriggering = !this.isTriggering
+    console.log(this.nextNodes)
+    this.nextNodes.forEach(node=>{
+      node.synth.context.options.envelope.attack=1
+    })
   }
   input(args) {
     this.lastTriggerTime = frameCount
