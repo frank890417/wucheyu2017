@@ -61,7 +61,7 @@ class Module {
     this.updateModule && this.updateModule()
     if (this.nextNodes.length){
 
-      this.p.x = this.nextNodes[0].p.x
+      this.nextNodes[0].p.x = this.p.x
     }
   }
   trigger() {

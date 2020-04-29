@@ -323,7 +323,8 @@ class Synth extends Module {
     let defs = {
       symbol: "🎺",
       synth: new Tone.PolySynth({
-        polyphony: 4
+        polyphony: 4,
+        volume : -5
       }).toMaster(),
       lastTriggerTime: 0,
       isTriggering: false,
@@ -535,15 +536,18 @@ class Keyboard extends Module{
     stroke(0)
     let blackIndex = [0,1,3,4,5]
     blackIndex = blackIndex.concat(blackIndex.map(o=>o+7))
-    let hoveringIndex = floor((mouseX-this.p.x)/ this.keyW)
+    let keyInfo = this.getKeyPlace()
     for(var i=0;i<this.keyCount;i++){
       push()
-        if (hoveringIndex==i && this.isMouseInModule()){
+      if (!keyInfo.black){
+        if (keyInfo.index==i && this.isMouseInModule()){
           fill(200)
         }
-        // if (this.getkey()==i){
-        //   fill(100)
-        // }
+        if (mouseIsPressed && keyInfo.index==i && this.isMouseInModule() ){
+          fill(100)
+        }
+
+      }
         rect(i*this.keyW,0,this.keyW,this.keyH)
       pop()
     } 
@@ -551,8 +555,18 @@ class Keyboard extends Module{
       push()
         if (blackIndex.indexOf(i)!=-1){
           fill(0)
-
+          if (keyInfo.black){
+           
+            if (keyInfo.index==i && keyInfo.black && this.isMouseInModule()){
+              fill(100)
+            }
+            if (mouseIsPressed && keyInfo.black && keyInfo.index==i && this.isMouseInModule() ){
+              fill(150)
+            }
+          
+          }
           rect(i*this.keyW+this.keyW*0.6,0,this.keyW*0.6,this.keyH/1.6)
+
         }
       pop()
     }
@@ -601,5 +615,45 @@ class Keyboard extends Module{
   }
 
 
+
+}
+// class MidiInput extends Module{
+
+// }
+
+class SoundSofter extends Module {
+  constructor(args) {
+    super(args)
+    this.type = this.constructor.name
+    this.duration = 50
+    this.lastTriggerTime = 0
+  }
+
+  mouseWheel(delta) {
+    if (this.isMouseInModule()) {
+      this.duration += Math.round(delta / 5)
+    }
+  }
+  updateModule() {}
+  drawModule() {
+    push()
+    translate(this.p.x, this.p.y + 10)
+    textSize(40)
+    text("🐢", this.size.x / 2, this.size.y / 2 + map(frameCount - this.lastTriggerTime, 0, this.duration / 10, -15, 0, true))
+    fill(255);
+    textSize(12)
+    text(this.duration, this.size.x / 2, this.size.y / 2 + 10)
+    pop()
+
+  }
+  trigger() {
+    this.isTriggering = !this.isTriggering
+  }
+  input(args) {
+    this.lastTriggerTime = frameCount
+    setTimeout(() => {
+      this.outputToNextNodes(args)
+    }, this.duration)
+  }
 
 }
