@@ -13,8 +13,8 @@
           a.btn.btn-secondary(href="https://cheyuwu.wordpress.com" target="_blank") Update Plans
           
         .col-sm-9
-          CodeArea( :scriptFiles="scriptFiles",
-                :hidecode="true", @scroll.stop="()=>{}")
+          p5-vue-mirror( :scriptFiles="scriptFiles",
+                   @scroll.stop="()=>{}")
   
 </template>
 

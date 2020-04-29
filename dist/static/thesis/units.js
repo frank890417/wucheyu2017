@@ -2,7 +2,7 @@
 class Melody extends Module {
   constructor(args) {
     super(args)
-    this.type = "Melody🎹"
+    this.type = this.constructor.name
     // this.synth = args,synth
     this.noteSpanSize = 18
     this.size.x = this.notes.length * this.noteSpanSize + 10
@@ -101,10 +101,10 @@ class Melody extends Module {
   }
 
 }
-class Panner extends Module {
+class Transporter extends Module {
   constructor(args) {
     super(args)
-    this.type = "Panner"
+    this.type = this.constructor.name
     this.keyCount = 25
     this.span = 20
     this.size.x = this.span * this.keyCount
@@ -154,7 +154,7 @@ class Panner extends Module {
 class Randomizer extends Module {
   constructor(args) {
     super(args)
-    this.type = "Randomizer"
+    this.type = this.constructor.name
     this.panScale = 10
     this.panValue = 20
     this.size.x = 50
@@ -205,7 +205,7 @@ class Randomizer extends Module {
 class Emotioner extends Module {
   constructor(args) {
     super(args)
-    this.type = "Emotioner"
+    this.type = this.constructor.name
     this.size.x = 100
     this.majorChord = ['C', 'D', 'E', 'F', 'G', 'A', 'B']
     this.minorChord = ['C', 'D', 'Eb', 'F', 'G', 'Ab', 'Bb']
@@ -263,7 +263,7 @@ class Emotioner extends Module {
 class Metro extends Module {
   constructor(args) {
     super(args)
-    this.type = "Metro"
+    this.type = this.constructor.name
     this.swing = 0
     this.triggerCount = 0
 
@@ -321,7 +321,6 @@ class Metro extends Module {
 class Synth extends Module {
   constructor(args) {
     let defs = {
-      type: "Synth",
       symbol: "🎺",
       synth: new Tone.PolySynth({
         polyphony: 4
@@ -330,6 +329,7 @@ class Synth extends Module {
       isTriggering: false,
     }
     super(args)
+    this.type = this.constructor.name
     Object.assign(defs, args)
     Object.assign(this, defs)
 
@@ -373,7 +373,7 @@ class Synth extends Module {
 class Moduler extends Module {
   constructor(args) {
     super(args)
-    this.type = "Moduler"
+    this.type = this.constructor.name
     this.modulo = 4
     this.size.x = this.modulo * 20 + 5
     this.size.y = 30
@@ -438,7 +438,7 @@ class Moduler extends Module {
 class Delayer extends Module {
   constructor(args) {
     super(args)
-    this.type = "Delayer"
+    this.type = this.constructor.name
     this.duration = 50
     this.lastTriggerTime = 0
   }
@@ -474,7 +474,7 @@ class Delayer extends Module {
 class Harmonizer extends Module {
   constructor(args) {
     super(args)
-    this.type = "Harmonizer"
+    this.type = this.constructor.name
     this.harmony = 3
     // this.lastTriggerTime = 0
   }
@@ -517,5 +517,89 @@ class Harmonizer extends Module {
     // console.log(results.map(n=>n.note))
     this.outputToNextNodes(results)
   }
+
+}
+class Keyboard extends Module{
+  constructor(args) {
+    super(args)
+    this.type = this.constructor.name
+    this.keyW = 12
+    this.keyH = 50
+    this.keyCount = 15
+    this.size.set(this.keyW*this.keyCount,this.keyH)
+  }
+  drawModule() {
+    push()
+    translate(this.p.x, this.p.y)
+    fill(255)
+    stroke(0)
+    let blackIndex = [0,1,3,4,5]
+    blackIndex = blackIndex.concat(blackIndex.map(o=>o+7))
+    let hoveringIndex = floor((mouseX-this.p.x)/ this.keyW)
+    for(var i=0;i<this.keyCount;i++){
+      push()
+        if (hoveringIndex==i && this.isMouseInModule()){
+          fill(200)
+        }
+        // if (this.getkey()==i){
+        //   fill(100)
+        // }
+        rect(i*this.keyW,0,this.keyW,this.keyH)
+      pop()
+    } 
+    for(var i=0;i<this.keyCount;i++){
+      push()
+        if (blackIndex.indexOf(i)!=-1){
+          fill(0)
+
+          rect(i*this.keyW+this.keyW*0.6,0,this.keyW*0.6,this.keyH/1.6)
+        }
+      pop()
+    }
+    pop()
+  }
+  getKeyPlace(){
+    let hoveringIndex = floor((mouseX-this.p.x)/ this.keyW)
+    let hoveringIndexBlack = floor((mouseX-this.p.x-this.keyW/2)/ this.keyW)
+    let res = {
+      index: 0,
+      black: false
+    }
+    if (mouseY-this.p.y<this.keyH/1.6){
+      res.black=true
+      res.index = hoveringIndexBlack
+    }else{
+      res.index = hoveringIndex
+    }
+    return res
+  }
+  getkey(){
+    
+    let blackIndex = [0,1,3,4,5]
+    blackIndex = blackIndex.concat(blackIndex.map(o=>o+7))
+    let soundBase = 60
+    let whiteMapping = [0,2,4,5,7,9,11]
+    whiteMapping = whiteMapping.concat(whiteMapping.map(o=>o+12))
+    whiteMapping = whiteMapping.concat(whiteMapping.map(o=>o+24))
+    let blackMapping = [1,3,0,6,8,10,0]
+    blackMapping = blackMapping.concat(blackMapping.map(o=>o+12))
+  
+    let keyInfo = this.getKeyPlace()
+    if (keyInfo.black){
+      return blackMapping[keyInfo.index]+soundBase
+    }else{
+      return whiteMapping[keyInfo.index]+soundBase
+
+    }
+  }
+  mousePressedModule() {
+    this.isTriggering = !this.isTriggering
+    this.outputToNextNodes({
+      note: Tone.Midi(this.getkey()).toNote()
+    })
+    
+  }
+
+
 
 }

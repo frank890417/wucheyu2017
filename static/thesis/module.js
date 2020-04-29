@@ -35,7 +35,7 @@ class Module {
     fill(255)
     textAlign(LEFT, BOTTOM)
     noStroke()
-    text(this.type, this.p.x, this.p.y)
+    text(this.type, this.p.x, this.p.y-3)
     pop()
     push()
     fill(255)
@@ -59,6 +59,10 @@ class Module {
       // this.p=createVector(Math.round(this.p.x/span)*span,Math.round(this.p.y/span)*span)
     }
     this.updateModule && this.updateModule()
+    if (this.nextNodes.length){
+
+      this.p.x = this.nextNodes[0].p.x
+    }
   }
   trigger() {
 
@@ -81,6 +85,7 @@ class Module {
   }
   mousePressed() {
     if (this.isMouseInModule()) {
+      this.mousePressedModule && this.mousePressedModule()
       this.isPressing = true
     } else {
       this.isPressing = false
@@ -92,11 +97,14 @@ class Module {
     return this.isMouseInModule()
   }
   connectTo(node) {
-    this.nextNodes.push(node)
+    if (this.nextNodes.indexOf(node)==-1){
+      this.nextNodes.push(node)
+    }
     return this
   }
   input(args) {
     console.log(args)
+    this.outputToNextNodes(args)
   }
   outputToNextNodes(data) {
     this.nextNodes.forEach(node => {

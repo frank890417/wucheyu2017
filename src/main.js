@@ -13,9 +13,11 @@ import SoftScroll from './plugins/soft_scroll.js'
 // import p5 from 'p5'
 import VueAnalytics from 'vue-analytics'
 
-import VueCodemirror from 'vue-codemirror'
-import 'codemirror/mode/javascript/javascript.js'
-import 'codemirror/lib/codemirror.css'
+// import VueCodemirror from 'vue-codemirror'
+// import 'codemirror/mode/javascript/javascript.js'
+// import 'codemirror/lib/codemirror.css'
+import pvm from 'p5-vue-mirror'
+Vue.use(pvm)
 // import 'font-awesome/css/all.css'
 
 import CodeArea from './components/CodeArea'
