@@ -61,10 +61,10 @@ class Module {
       // this.p=createVector(Math.round(this.p.x/span)*span,Math.round(this.p.y/span)*span)
     }
     this.updateModule && this.updateModule()
-    if (this.nextNodes.length && this.isPressing){
+    // if (this.nextNodes.length && this.isPressing){
 
-      this.nextNodes[0].p.x = this.p.x
-    }
+    //   this.nextNodes[0].p.x = this.p.x
+    // }
   }
   trigger() {
 
@@ -105,7 +105,7 @@ class Module {
     return this
   }
   input(args) {
-    console.log(args)
+    // console.log(args)
     this.outputToNextNodes(args)
   }
   outputToNextNodes(data) {

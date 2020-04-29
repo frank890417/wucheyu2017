@@ -309,7 +309,7 @@ function initDefault(){
     p: createVector(450, 450),
   })
   modules.push(melody1)
-  modules.push(melody2)
+  // modules.push(melody2)
   modules.push(transporter)
   modules.push(transporter2)
   modules.push(transporter3)
