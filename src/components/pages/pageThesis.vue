@@ -7,14 +7,18 @@
           h2 Intuitive music expression
           p A web-based tool that allowed people to work together, edit and change melody in an intuitive way.
           p Find the way to express and made music in more intuitive and understandable, playful way.
+          br
           a.btn.btn-secondary(href="https://www.youtube.com/watch?v=V32BcSGfJUk" target="_blank") Midterm Presentation
           br
           br
-          a.btn.btn-secondary(href="https://cheyuwu.wordpress.com" target="_blank") Update Plans
+          a.btn.btn-secondary(href="https://docs.google.com/document/d/1aBBxB2LtJBwy-D9WFnjrVTo9xy54mTxnAAT7VV6M5KM/edit?usp=sharing", target='_blank') Latest Thesis Draft
+          br
+          br
+          a.btn.btn-secondary(href="https://cheyuwu.wordpress.com" target="_blank") Update Logs
           
         .col-sm-9
           p5-vue-mirror( :scriptFiles="scriptFiles",
-                   @scroll.stop="()=>{}")
+                   @scroll.stop="()=>{}", :hidecode="true")
   
 </template>
 
