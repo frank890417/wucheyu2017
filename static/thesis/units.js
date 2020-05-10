@@ -13,9 +13,10 @@ class Melody extends Module {
   }
   playNextNote(delta = 1) {
     this.index += delta
+    this.index = this.index % this.notes.length
     this.isTriggering = true
     this.lastTriggerTime = frameCount
-    this.currentNote = this.notes[this.index % this.notes.length]
+    this.currentNote = this.notes[this.index]
     // console.log(this.index)
     if (this.currentNote) {
       // this.currentNote = 
@@ -31,7 +32,7 @@ class Melody extends Module {
   }
 
   input(args) {
-    console.log(args)
+    // console.log(args)
     let note
     if (args.note){
       this.updateNote(args.note)
@@ -321,7 +322,7 @@ class Metro extends Module {
   constructor(args) {
     super(args)
     this.type = this.constructor.name
-    this.swing = 0
+    this.swing = this.swing || 0
     this.triggerCount = 0
 
     this.span = 12
@@ -397,7 +398,7 @@ class Synth extends Module {
     }).toDestination()
     this.lastTriggerTime = 0
     this.isTriggering = false
-    this.volume = 0
+    this.volume = this.volume || -8
   }
 
   mouseWheel(delta) {
@@ -443,10 +444,27 @@ class Synth extends Module {
     this.input({
       note: "440Hz"
     })
+    this.synth.options.envelope.attack=0.5
+    console.log( this.synth)
   }
   input(args) {
     // this.trigger(args.note)
     // console.log(args)
+    if (args.adsr){
+      this.synth.options.envelope.attack= args.adsr.attack || 0.5
+      this.synth.options.envelope.decay = args.adsr.decay || 0.1
+      this.synth.options.envelope.release = args.adsr.release || 1
+      this.synth.options.envelope.sustain = args.adsr.sustain || 0.3
+      // this.synth.options.envelope.attak=0.5
+    }
+    if (args.detune){
+      this.synth.options.detune = args.detune
+      // this.synth.options.envelope.attak=0.5
+    }
+    if (args.volume){
+      this.volume = map(args.volume,0,127,-20,0)
+      // this.synth.options.envelope.attak=0.5
+    }
 
     this.lastTriggerTime = frameCount
     args = Array.isArray(args) ? args : [args]
@@ -563,7 +581,7 @@ class Harmonizer extends Module {
   constructor(args) {
     super(args)
     this.type = this.constructor.name
-    this.harmony = 3
+    this.harmony =  this.harmony || 3
     // this.lastTriggerTime = 0
   }
 
@@ -693,10 +711,10 @@ class Keyboard extends Module{
 
     }
   }
-  mousePressedModule() {
+  mousePressedModule(k) {
     this.isTriggering = !this.isTriggering
     this.outputToNextNodes({
-      note: Tone.Midi(this.getkey()).toNote()
+      note: Tone.Midi(k || this.getkey()).toNote()
     })
     
   }
@@ -712,7 +730,7 @@ class SoundSofter extends Module {
   constructor(args) {
     super(args)
     this.type = this.constructor.name
-    this.duration = 50
+    this.duration = this.duration || 50
     this.lastTriggerTime = 0
   }
 
@@ -743,7 +761,15 @@ class SoundSofter extends Module {
   input(args) {
     this.lastTriggerTime = frameCount
     setTimeout(() => {
-      this.outputToNextNodes(args)
+      this.outputToNextNodes({
+        ...args,
+        adsr: {
+          attack: this.duration/100,
+          decay: 0.2,
+          release: 3,
+          sustain: 0.5
+        }
+      })
     }, this.duration)
   }
 
