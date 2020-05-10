@@ -4,6 +4,7 @@ class Melody extends Module {
     super(args)
     this.type = this.constructor.name
     // this.synth = args,synth
+    this.notes = this.notes || []
     this.noteSpanSize = 17
     this.size.x = this.notes.length * this.noteSpanSize + 10
     this.size.y = 40
@@ -138,7 +139,7 @@ class Transporter extends Module {
   constructor(args) {
     super(args)
     this.type = this.constructor.name
-    this.keyCount = 25
+    this.keyCount = 5
     this.span = 20
     this.size.x = this.span * this.keyCount
     this.size.y = this.span
@@ -154,23 +155,46 @@ class Transporter extends Module {
     push()
 
     translate(this.p.x, this.p.y)
-    for (var i = 0; i < this.keyCount; i++) {
-      colorMode(HSB)
-      fill(map(i, 0, this.keyCount, 0, 255), 10, 255)
-      colorMode(RGB)
-      if (this.panValue == i - Math.floor(this.keyCount / 2)) {
-        fill('red')
+    let keys = ["⎵","↓",,"↑","⎴"]
+    for (var i = 0; i < 5; i++) {
+     
+      // if 
+      // fill(255)
+      if (i!=2){
+        fill('white')
+        // if (this.panValue == i - Math.floor(this.keyCount / 2)) {
+        //   fill('red')
+        // }
+        
+      }else{
+        fill('black')
+        // stroke('white')
       }
       rect(i * this.span, 0, this.span, this.span)
       fill(0)
       noStroke()
-      text(i - Math.floor(this.keyCount / 2), 10 + i * this.span, 10)
+      if (i==2){
+        colorMode(HSB)
+        fill(map(this.panValue, -12,12, 180, 0,true), 40, 255)
+        colorMode(RGB)
+      } 
+      textStyle(BOLD)
+      text(keys[i] || this.panValue, 10 + i * this.span, 15)
     }
     fill('red')
     pop()
   }
+  mousePressedModule(){
+    let btnIndex= Math.floor((mouseX - this.p.x) / this.span) - Math.floor(this.keyCount / 2)
+    if (btnIndex==-2) this.panValue=-12
+    if (btnIndex==-1) this.panValue-=1
+    if (btnIndex==1) this.panValue+=1
+    if (btnIndex==2) this.panValue=12
+  }
   trigger() {
-    this.panValue = Math.floor((mouseX - this.p.x) / this.span) - Math.floor(this.keyCount / 2)
+    
+    
+
 
   }
   handleNote(note) {
@@ -353,36 +377,54 @@ class Metro extends Module {
 }
 class Synth extends Module {
   constructor(args) {
-    let defs = {
-      symbol: "🎺",
-      synth: new Tone.PolySynth({
-        polyphony: 4,
-        volume : -5
-      },Tone.Synth,
-      {
-        oscillator : {
-        type : triangle
-        } ,
-        envelope : {
-        attack : 0.005 ,
-        decay : 0.1 ,
-        sustain : 0.3 ,
-        release : 1
-        }
-      }).toMaster(),
-      lastTriggerTime: 0,
-      isTriggering: false,
-    }
     super(args)
     this.type = this.constructor.name
-    Object.assign(defs, args)
-    Object.assign(this, defs)
-
+    this.symbol = this.symbol || "🎺"
+    this.synth = this.synth || new Tone.PolySynth({
+      polyphony: 4,
+      volume : -5
+    },Tone.Synth,
+    {
+      oscillator : {
+      type : triangle
+      } ,
+      envelope : {
+      attack : 0.005 ,
+      decay : 0.1 ,
+      sustain : 0.3 ,
+      release : 1
+      }
+    }).toDestination()
+    this.lastTriggerTime = 0
+    this.isTriggering = false
+    this.volume = 0
   }
-  updateModule() {}
+
+  mouseWheel(delta) {
+    if (this.isMouseInModule()) {
+      this.volume += delta > 0 ? 1 : -1
+    }
+  }
+  updateModule() {
+    // console.log(this.synth)
+    this.synth.volume.value = this.volume
+    this.volume=constrain( this.volume,-40,0)
+  }
   drawModule() {
     push()
+
+    let volumeH = map( this.volume,0,-40,this.size.y,0)
+    fill(255,50)
+    rect(this.p.x+this.size.x+4,this.p.y,2,this.size.y,10)
+    fill(255,180)
+    rect(this.p.x+this.size.x+4,this.p.y+this.size.y-volumeH,2,volumeH,10)
+
     translate(this.p.x + this.size.x / 2, this.p.y + this.size.y / 2)
+    
+    
+    
+
+
     // if (this.isTriggering) {
     fill(lerpColor(color('yellow'), color('black'), map(frameCount - this.lastTriggerTime, 0, 10, 0, 1, true)))
     // } else {
@@ -452,7 +494,7 @@ class Moduler extends Module {
 
     for (var i = 0; i < this.modulo; i++) {
       fill(255)
-      if (i <= this.triggerCount % this.modulo) {
+      if (i <= (this.triggerCount+2) % this.modulo) {
         fill('red')
       }
       ellipse(i * 20, this.size.y / 2, 10, 10)
@@ -478,13 +520,14 @@ class Moduler extends Module {
       this.outputToNextNodes(args)
     }
     this.triggerCount++
+    
   }
 }
 class Delayer extends Module {
   constructor(args) {
     super(args)
     this.type = this.constructor.name
-    this.duration = 50
+    this.duration = this.duration || 50
     this.lastTriggerTime = 0
   }
 

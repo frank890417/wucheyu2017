@@ -55,11 +55,13 @@ setTimeout(() => {
 
   // this.$set(this,"userData",data)
   // console.log(data)
-try{
-  $.getJSON("/static/sketchs.php",(data)=>{
+
+try{  
+  $.getJSON("/static/sketchs.json",(data)=>{
     store.commit("setUserData",data)
-    // this.$set(this,"userData",data)
-    // console.log(data)
+    $.getJSON("/static/sketchs.php",(data)=>{
+      store.commit("setUserData",data)
+    })
   })
 }catch (err){
   $.getJSON("/static/sketchs.json",(data)=>{

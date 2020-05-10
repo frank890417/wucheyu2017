@@ -29,6 +29,58 @@ let toolBox = {
 
 let toolTips
 
+var _cls_ = {}; // serves as a cache, speed up later lookups
+function getClass(name){
+  if (!_cls_[name]) {
+    // cache is not ready, fill it up
+    if (name.match(/^[a-zA-Z0-9_]+$/)) {
+      // proceed only if the name is a single word string
+      _cls_[name] = eval(name);
+    } else {
+      // arbitrary code is detected 
+      throw new Error("Who let the dogs out?");
+    }
+  }
+  return _cls_[name];
+}
+
+function getAllData(){
+  modules.forEach((m,mid)=>m.id=mid)
+  let formattedData = modules.map(m=>{
+    let attrs = {}
+    Object.entries(m).forEach((pair)=>{
+      let key = pair[0]
+      let content=pair[1]
+      if (('p,id,notes'.split(",").indexOf(key)!=-1 || typeof(content)!='object') && 
+          'isPressing'.split(",").indexOf(key)==-1 ){
+        attrs[key]=content
+        if (typeof content=="object"){
+          content.p5=undefined
+        }
+      }
+      if (key=="nextNodes"){
+        attrs.nextNodes = content.map(node=>node.id)
+      }
+    })
+    return attrs
+  })
+  return formattedData
+}
+function readAllData(d){
+  modules.forEach(m=>m.nextNodes=[])
+  modules = []
+  let items = d
+  items.forEach(item=>{
+    // console.log(item.type)
+    let _CLASS =  getClass(item.type)
+    let module = new _CLASS(item)
+    modules.push(module)
+  })
+  modules.forEach((module)=>{
+    module.nextNodes = module.nextNodes.map(mid=>modules.find(m=>m.id==mid))
+  })
+}
+
 function setup() {
   createCanvas(windowWidth, windowHeight)
   background(0)
@@ -52,6 +104,21 @@ function setup() {
   navigator.requestMIDIAccess()
     .then(onMIDISuccess, ()=>{});
     toolTips = Object.entries(toolBox).map(o=>o[0]+": "+ ( o[1].name ) ).join("\n") 
+
+
+  let btnSave = createButton("Save")
+  btnSave.position(width-80,height-100)
+  btnSave.mousePressed(()=>{
+    let d = JSON.stringify(getAllData())
+    console.log(d)
+    storeItem('musicdata' ,d   )
+  })
+
+  let btnLoad = createButton("Restore")
+  btnLoad.position(width-80,height-50)
+  btnLoad.mousePressed(()=>{
+    readAllData(JSON.parse(getItem("musicdata")))
+  })
 }
 
 function onMIDISuccess(midiAccess) {
@@ -200,8 +267,8 @@ function keyPressed() {
     selectedModule = null
   }
   if (key == "Escape") {
-    modules= modules.filter(m=>m.type=='Melody')
     modules.forEach(m=>m.nextNodes=[])
+    modules=[]
   }
 
 }
@@ -262,7 +329,7 @@ function initDefault(){
   })
   // var freeverb = new Tone.Freeverb().toDestination();
   // freeverb.dampening.value = 2000;
-  // var freeverb2 = new Tone.Freeverb().toMaster();
+  // var freeverb2 = new Tone.Freeverb().toDestination();
   // freeverb2.dampening.value =5000;
   let synthM = new Synth({
     p: createVector(100, 250),

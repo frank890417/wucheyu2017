@@ -1,19 +1,25 @@
 class Module {
   constructor(args) {
+    let p = args.p? createVector(args.p.x,args.p.y):createVector(30,30) 
+    let size = args.size? createVector(args.size.x,args.size.y):createVector(50,50)
     let def = {
-      size: createVector(50, 50),
-      p: createVector(30, 30),
+      size: createVector(50,50) ,
+      p: createVector(30,30),
       isPressing: false,
       type: "Module",
       nextNodes: []
     }
     Object.assign(def, args)
+    // def.p = p
+    // def.size = size
     Object.assign(this, def)
+    this.p = p
+    this.size=size
   }
   drawReact() {
     push()
       translate(this.p.x, this.p.y)
-      stroke(255, 70)
+      stroke(255, 100)
       if (linkSource && this.isMouseInModule()) {
         stroke(50, 50, 255, 400)
         strokeWeight(4)
@@ -27,7 +33,7 @@ class Module {
       if (this.isPressing) {
         stroke('red')
       }
-      rect(0, 0, this.size.x, this.size.y)
+      rect(0, 0, this.size.x, this.size.y,2)
     pop()
   }
   draw() {
@@ -75,13 +81,13 @@ class Module {
       mouseY > this.p.y && mouseY < this.p.y + this.size.y)
   }
   isClickedOnOutputPoint() {
-    let d = createVector(mouseX, mouseY).dist(this.p.copy().add(createVector(0, this.size.y)))
+    let d = dist(mouseX,mouseY,this.p.x,this.p.y+ this.size.y)
     // console.log(d)
     return d < 10
   }
   
   isClickedOnInputPoint() {
-    let d = createVector(mouseX, mouseY).dist(this.p)
+    let d = dist(mouseX,mouseY,this.p.x,this.p.y)
     // console.log(d)
     return d < 10
   }
