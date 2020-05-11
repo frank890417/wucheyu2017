@@ -6,10 +6,11 @@
           h1 Generative Arts
           p Keep exploring the world with curious mind and imaginations.
       .row.mt-4
-        a.col-sm-6.col-md-4.col-lg-3.animated.fadeIn(v-for="item in sketches", :href="`https://www.openprocessing.org/sketch/${item.visualID}`",
-                target="_blank")
-          img(:src="`https://openprocessing-usercontent.s3.amazonaws.com/thumbnails/visualThumbnail${item.visualID}@2x.jpg`")
+        a.col-sm-6.col-md-4.col-lg-3.animated.fadeIn(v-for="(item,itemId) in sketches", :href="`https://www.openprocessing.org/sketch/${item.visualID}`",
+                target="_blank",@mouseenter="hoveringItem=item", @mouseleave="hoveringItem=null")
+          img(:src="( hoveringItem===item && getGifUrl(item))? getGifUrl(item) : getThumbnail(item)")
           h5.mb-4 \#{{item.title}}
+          
 </template>
 
 <script>
@@ -20,6 +21,7 @@ export default {
   data(){
     return {
       // userData: {}
+      hoveringItem: null
     }
   },
   computed:{
@@ -31,6 +33,15 @@ export default {
         return results
       }
       return []
+    }
+  },
+  methods: {
+
+    getGifUrl(item){
+      return ((item.description || "").split("[GIF ")[1] || "").split("]")[0]
+    },
+    getThumbnail(item){
+      return `https://openprocessing-usercontent.s3.amazonaws.com/thumbnails/visualThumbnail${item.visualID}@2x.jpg`
     }
   },
   created(){
