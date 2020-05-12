@@ -264,58 +264,95 @@ class Emotioner extends Module {
   constructor(args) {
     super(args)
     this.type = this.constructor.name
-    this.size.x = 100
+    this.spanSize = 40
+    this.size.x =  this.spanSize*3
+    this.size.y =  this.spanSize
     this.majorChord = ['C', 'D', 'E', 'F', 'G', 'A', 'B']
     this.minorChord = ['C', 'D', 'Eb', 'F', 'G', 'Ab', 'Bb']
     this.currentMapping = this.majorChord
     this.targetMapping = this.majorChord
+    this.mood = this.mood || "Happy"
+    this.moods = ["Happy","Sad","Lazy"]
+    this.emojies = ["🙂","🙁","🥱"]
   }
   drawModule() {
     push()
-    translate(this.p.x, this.p.y)
-    noFill()
+      translate(this.p.x, this.p.y)
+      this.moods.forEach((m,mId)=>{
+        push()
+          translate(mId* this.spanSize,0)
+          fill(this.mood === m ? 150 : 0)
+          rect(0, 0,  this.spanSize,  this.spanSize) 
 
-    fill(this.targetMapping === this.majorChord ? 150 : 0)
-    rect(0, 0, 50, 50)
-    fill(this.targetMapping === this.minorChord ? 150 : 0)
-    rect(50, 0, 50, 50)
-    fill(255)
-    textSize(35)
-    textAlign(LEFT, TOP)
-    push()
-    if (this.targetMapping === this.majorChord) {
-      translate(0, sin(frameCount / 10) * 5)
-    }
-    translate(5, 10)
-    // rotate(PI/2)
-    text("🙂", 0, 0)
-    pop()
-    push()
-    if (this.targetMapping === this.minorChord) {
-      translate(0, sin(frameCount / 10) * 5)
-    }
-    translate(55, 10)
-    // rotate(PI/2)
-    text("🙁", 0, 0)
-    pop()
+          fill(255)
+          textSize( this.spanSize-10)
+          textAlign(LEFT, TOP)
+          if (this.mood === m ) {
+            translate(0, sin(frameCount / 10) * 5)
+          }
+        translate(5, 5)
+        text(this.emojies[mId], 0, 0)
+        pop()
+    })
     pop()
   }
   trigger() {
-    if (mouseX - this.p.x > this.size.x / 2) {
-      this.targetMapping = this.minorChord
-    } else {
-      this.targetMapping = this.majorChord
-
-    }
+    this.mood = this.moods[int((mouseX - this.p.x)/ this.spanSize)]
   }
   input(args) {
     let note = args.note
+    this.targetMapping = (this.mood=="Sad" )?this.minorChord:this.majorChord
+    let options = {}
     this.currentMapping.forEach((n, nid) => {
       note = (note || "").replace(n, this.targetMapping[nid])
     })
-    this.outputToNextNodes({
-      note: note
-    })
+    if (this.mood=="Lazy"){
+      options = {
+        adsr: {
+          attack: 0.10,
+          decay: 0.3,
+          release: 3,
+          sustain: 0.5
+        },
+        detune: 2,
+        len: "4n"
+      }
+    }
+    if (this.mood=="Angry"){
+      options = {
+        adsr: {
+          attack: 0.001,
+          decay: 0.1,
+          release: 0.1,
+          sustain: 0
+        },
+        detune: 5,
+        volume: 0,
+        len: "8n"
+      }
+    }
+    if (this.mood=="Lazy"){
+      setTimeout(()=>{
+        this.outputToNextNodes({
+          note: note,
+          ...options
+        })
+      },random(50))
+    }else{
+
+      this.outputToNextNodes({
+        note: note,
+        ...options
+      })
+      if (this.mood=="Angry"){
+        setTimeout(()=>{
+          this.outputToNextNodes({
+            note: note,
+            ...options
+          })
+        },100)
+      }
+    }
   }
 }
 class Metro extends Module {
@@ -373,7 +410,7 @@ class Metro extends Module {
   }
   input(args) {
     this.lastTriggerTime = frameCount
-    this.outputToNextNodes(args)
+    this.outputToNextNodes(1)
   }
 }
 class Synth extends Module {
@@ -465,12 +502,13 @@ class Synth extends Module {
       this.volume = map(args.volume,0,127,-20,0)
       // this.synth.options.envelope.attak=0.5
     }
+    let noteLen = args.len || "16n"
 
     this.lastTriggerTime = frameCount
     args = Array.isArray(args) ? args : [args]
     args.forEach(obj => {
       if ( obj && obj.note && (obj.note + "").indexOf('undefined')==-1 ){
-        this.synth.triggerAttackRelease((obj || {}).note || "440Hz", "16n")
+        this.synth.triggerAttackRelease((obj || {}).note || "440Hz", noteLen)
       }
     })
   }
@@ -479,7 +517,7 @@ class Moduler extends Module {
   constructor(args) {
     super(args)
     this.type = this.constructor.name
-    this.modulo = 4
+    this.modulo = this.modulo || 4
     this.size.x = this.modulo * 20 + 5
     this.size.y = 30
     this.triggerCount = 0
