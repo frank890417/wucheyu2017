@@ -13,7 +13,7 @@
             div.subroute(:class="{white: $route.path=='/about'}")
               router-link(to="/" :class="{active: $route.path=='/'}") Works
               router-link(to="/about" :class="{active: $route.path=='/about'}") About
-              router-link(to="/experiment" :class="{active: $route.path=='/experiment'}") Experiments
+              //router-link(to="/experiment" :class="{active: $route.path=='/experiment'}") Experiments
               router-link(to="/arts" :class="{active: $route.path=='/arts'}") Arts
               router-link(to="/thesis" :class="{active: $route.path=='/thesis'}") Thesis
               //- router-link(to="/research" :class="{active: $route.path=='/research'}") Research
