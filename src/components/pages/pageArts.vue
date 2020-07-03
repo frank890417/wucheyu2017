@@ -6,9 +6,11 @@
           h1 Generative Arts
           p Keep exploring the world with curious mind and imaginations.
       .row.mt-4
-        a.col-sm-6.col-md-4.col-lg-3.animated.fadeIn(v-for="(item,itemId) in sketches", :href="`https://www.openprocessing.org/sketch/${item.visualID}`",
+        a.col-sm-6.col-md-4.col-lg-3.animated.fadeIn(v-for="(item,itemId) in sketches", 
+          :href="`https://www.openprocessing.org/sketch/${item.visualID}`",
                 target="_blank",@mouseenter="hoveringItem=item", @mouseleave="hoveringItem=null")
-          img(:src="( hoveringItem===item && getGifUrl(item))? getGifUrl(item) : getThumbnail(item)")
+          img(:src="( hoveringItem===item && getGifUrl(item))? getGifUrl(item): getThumbnail(item)")
+          //img(:src="( hoveringItem===item && getGifUrl(item))? getGifUrl(item): getCacheUrl(getThumbnail(item),item.title)")
           h5.mb-4 \#{{item.title}}
           
 </template>
@@ -36,7 +38,9 @@ export default {
     }
   },
   methods: {
-
+    getCacheUrl(url,name){
+      return `https://cheyuwu.com/static/img/cache.php?url=${url}&imgname=${name}`
+    },
     getGifUrl(item){
       return ((item.description || "").split("[GIF ")[1] || "").split("]")[0]
     },
