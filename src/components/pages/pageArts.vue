@@ -5,6 +5,10 @@
         .col-12
           h1 Generative Arts
           p Keep exploring the world with curious mind and imaginations.
+          span Follow new works on 
+          a(href="https://www.instagram.com/bosscodingplease/" target="_blank" title="Instagram") 
+            i.fab.fa-instagram 
+            span  bosscodingplease
       .row.mt-4
         a.col-sm-6.col-md-4.col-lg-3.animated.fadeIn(v-for="(item,itemId) in sketches", 
           :href="`https://www.openprocessing.org/sketch/${item.visualID}`",

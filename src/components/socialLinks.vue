@@ -2,6 +2,8 @@
   .social-links
     a(href="https://www.linkedin.com/in/cheyuwu/?locale=en_US" target="_blank" title="Linkedin") 
       i.fab.fa-linkedin-in
+    a(href="https://www.instagram.com/bosscodingplease/" target="_blank" title="Instagram") 
+      i.fab.fa-instagram
     a(href="mailto:cyw345@nyu.edu" target="_blank" title="Envelope") 
       i.far.fa-envelope
     a(href="https://codepen.io/frank890417" target="_blank" title="Codepen") 
