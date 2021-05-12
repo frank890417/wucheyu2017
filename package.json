@@ -10,7 +10,7 @@
     "start": "npm run dev"
   },
   "dependencies": {
-    "codemirror": "^5.53.2",
+    "codemirror": "^5.58.2",
     "compress.js": "^1.1.2",
     "element-ui": "^2.0.11",
     "gsap": "^2.0.2",
